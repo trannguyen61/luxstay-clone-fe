@@ -1,6 +1,22 @@
 import { createApp } from "vue";
+
+// UI
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+import "./assets/scss/main.scss";
+
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-createApp(App).use(store).use(router).mount("#app");
+// Plugins
+import I18n from "./plugins/i18n/i18n";
+import Axios from "./plugins/axios";
+
+createApp(App)
+  .use(ElementPlus)
+  .use(store)
+  .use(router)
+  .use(I18n)
+  .use(Axios)
+  .mount("#app");
