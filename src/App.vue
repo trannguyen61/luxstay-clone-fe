@@ -1,7 +1,24 @@
 <template>
-  <div id="nav">
-    <router-link to="/">{{ $t("shared.home") }}</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <el-container>
+    <el-header>
+    <nav-bar/>      
+    </el-header>
+    <el-main>
+    <router-view />
+    </el-main>
+  </el-container>
 </template>
+
+<script>
+import NavBar from './components/shared/NavBar.vue'
+
+export default {
+  components: {
+    NavBar
+  },
+
+  setup() {
+    
+  },
+}
+</script>

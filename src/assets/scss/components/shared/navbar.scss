@@ -1,0 +1,53 @@
+@import '../../consts.scss';
+
+.navbar {
+    display: flex;
+    align-items: center;
+
+    &--search {
+        max-width: 80%;
+
+        @media screen and (min-width: $lg) {
+            max-width: 40%;
+        }    
+    }
+
+    &--info {
+        margin-left: auto;
+    }
+
+    &--link {
+        margin: 0 15px;
+        font-size: .9em;
+    }
+
+
+    .el-input {
+        --el-input-icon-color: $secondary;
+        --el-input-placeholder-color: $secondary;
+    }
+
+    .el-date-editor .el-range__icon {
+        color: $secondary;
+    }
+
+    .el-date-editor .el-range-input::placeholder {
+        color: $secondary;
+    }
+}
+
+.searchbar {
+    display: flex;
+    box-shadow: 1px 1px 4px $shadow;
+    border-radius: $border-radius;
+    padding: 4px 15px;
+
+    input,
+    .el-date-editor {
+        border: none;
+    }
+
+    &--datepicker {
+        min-width: 200px;
+    }
+}

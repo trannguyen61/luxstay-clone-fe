@@ -1,20 +1,85 @@
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import './consts.scss';
+@import './components/components.scss';
+
+body {
+    font-weight: 500;
+    font-size: 1rem;
+    color: $text;
 }
 
-#nav {
-  padding: 30px;
+.card {
+    border: 1px solid $light;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 12px 0 $light;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.btn {
+    padding: 0 20px;
+    margin: 0 .4rem;
+    min-height: 36px;
+    border-radius: $border-radius;
 
-    &.router-link-exact-active {
-      color: #42b983;
+    &--primary {
+        background: $secondary;
+        color: white;
     }
-  }
+
+    .btn-icon {
+        color: white;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.divider {
+    display: inline-block;
+    width: 1px;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative;
+    background: $shadow;
+}
+
+a.link {
+    text-decoration: none;
+    transition: all .3s;
+    color: $text;
+
+    &:hover {
+        color: $highlight;
+    }
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.ml-1 {
+    margin-left: 0.5em;
+}
+
+.ml-2 {
+    margin-left: 1em;
+}
+
+.ml-3 {
+    margin-left: 1.5em;
+}
+
+.mr-1 {
+    margin-right: 0.5em;
+}
+
+.mr-2 {
+    margin-right: 1em;
+}
+
+.mr-3 {
+    margin-right: 1.5em;
 }

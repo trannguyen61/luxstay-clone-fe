@@ -10,13 +10,13 @@ import router from "./router";
 import store from "./store";
 
 // Plugins
-import I18n from "./plugins/i18n/i18n";
+import { i18n } from "./plugins/i18n/i18n";
 import Axios from "./plugins/axios";
 
 createApp(App)
   .use(ElementPlus)
   .use(store)
   .use(router)
-  .use(I18n)
+  .use(i18n)
   .use(Axios)
   .mount("#app");
