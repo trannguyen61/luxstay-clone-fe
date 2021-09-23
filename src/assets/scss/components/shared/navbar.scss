@@ -1,53 +1,83 @@
-@import '../../consts.scss';
+@import "../../consts.scss";
 
 .navbar {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    &--search {
-        max-width: 80%;
+  &--search {
+    max-width: 80%;
 
-        @media screen and (min-width: $lg) {
-            max-width: 40%;
-        }    
+    @media screen and (min-width: $lg) {
+      max-width: 40%;
     }
+  }
 
-    &--info {
-        margin-left: auto;
-    }
+  &--info {
+    margin-left: auto;
+  }
 
-    &--link {
-        margin: 0 15px;
-        font-size: .9em;
-    }
+  &--link {
+    margin: 0 15px;
+    font-size: 0.9em;
+  }
 
+  .el-input {
+    --el-input-icon-color: $secondary;
+    --el-input-placeholder-color: $secondary;
+  }
 
-    .el-input {
-        --el-input-icon-color: $secondary;
-        --el-input-placeholder-color: $secondary;
-    }
+  .el-date-editor .el-range__icon {
+    color: $secondary;
+  }
 
-    .el-date-editor .el-range__icon {
-        color: $secondary;
-    }
-
-    .el-date-editor .el-range-input::placeholder {
-        color: $secondary;
-    }
+  .el-date-editor .el-range-input::placeholder {
+    color: $secondary;
+  }
 }
 
 .searchbar {
-    display: flex;
-    box-shadow: 1px 1px 4px $shadow;
-    border-radius: $border-radius;
-    padding: 4px 15px;
+  display: flex;
+  box-shadow: 1px 1px 4px $shadow;
+  border-radius: $border-radius;
+  padding: 4px 15px;
 
-    input,
-    .el-date-editor {
-        border: none;
-    }
+  input,
+  .el-date-editor {
+    border: none;
+  }
 
-    &--datepicker {
-        min-width: 200px;
-    }
+  &--datepicker {
+    min-width: 200px;
+  }
+}
+
+.guest-picker {
+  display: flex;
+  align-items: center;
+}
+
+.guest-picker-btn {
+  cursor: pointer;
+  min-width: 115px;
+  display: flex;
+  align-items: center;
+  color: $secondary;
+  font-size: 0.9em;
+}
+
+.guest-picker-dialog {
+  position: absolute;
+  top: 70px;
+  padding: 12px 15px;
+  background: white;
+  z-index: 99;
+
+  &--input {
+    margin-bottom: 10px;
+  }
+
+  .el-input-number__decrease:hover,
+  .el-input-number__increase:hover {
+    color: $highlight;
+  }
 }

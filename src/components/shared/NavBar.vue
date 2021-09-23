@@ -21,6 +21,8 @@
           class="searchbar--datepicker"
         ></el-date-picker>
 
+        <guest-picker @pick-guest="pickGuest" />
+
         <button class="btn btn--primary">
           <i class="el-input__icon el-icon-search btn-icon"></i>
         </button>
@@ -41,15 +43,26 @@
 import { ref } from "vue";
 import { i18n } from "../../plugins/i18n/i18n";
 
+import GuestPicker from "./GuestPicker.vue";
+
 export default {
+  components: {
+    GuestPicker,
+  },
+
   setup() {
     let locationSearch = ref("");
     let dateRangeSearch = ref([]);
+
+    function pickGuest(guestObj) {
+      console.log(guestObj)
+    }
 
     return {
       i18n,
       locationSearch,
       dateRangeSearch,
+      pickGuest
     };
   },
 };
