@@ -81,3 +81,27 @@
     color: $highlight;
   }
 }
+
+.setting-picker-btn {
+  border-radius: 2rem;
+  background: $lighter;
+  border: 0.3125rem solid transparent;
+  font-size: 0.875rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.setting-picker-dialog {
+  padding-top: calc(12px + 0.5em);
+  right: 35px;
+
+  .picker-col-1 {
+    min-width: 170px;
+  }
+
+  .picker-col-2 {
+    min-width: 250px;
+  }
+}

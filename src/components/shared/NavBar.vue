@@ -17,7 +17,7 @@
           type="daterange"
           :start-placeholder="$t('shared.navbar.from_date')"
           :end-placeholder="$t('shared.navbar.to_date')"
-          :locale="i18n.locale"
+          format="DD-MM-YYYY"
           class="searchbar--datepicker"
         ></el-date-picker>
 
@@ -28,26 +28,29 @@
         </button>
       </div>
     </div>
-    <div class="navbar--info">
+    <div class="navbar--info d-flex align-items-center">
       <router-link class="link text-bold navbar--link" to="#">{{
         $t("shared.login")
       }}</router-link>
       <router-link class="link text-bold navbar--link" to="#">{{
         $t("shared.signup")
       }}</router-link>
+
+      <setting-picker />
     </div>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import { i18n } from "../../plugins/i18n/i18n";
 
 import GuestPicker from "./GuestPicker.vue";
+import SettingPicker from "./SettingPicker.vue";
 
 export default {
   components: {
     GuestPicker,
+    SettingPicker,
   },
 
   setup() {
@@ -55,14 +58,13 @@ export default {
     let dateRangeSearch = ref([]);
 
     function pickGuest(guestObj) {
-      console.log(guestObj)
+      console.log(guestObj);
     }
 
     return {
-      i18n,
       locationSearch,
       dateRangeSearch,
-      pickGuest
+      pickGuest,
     };
   },
 };

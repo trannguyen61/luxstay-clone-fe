@@ -34,18 +34,18 @@ body {
 }
 
 .text-btn {
-    font-weight: bold;
-    color: $primary;
-    border-style: none;
-    background: none;
+  font-weight: bold;
+  color: $primary;
+  border-style: none;
+  background: none;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 
-    &--highlight {
-        color: $highlight;
-    }
+  &--highlight {
+    color: $highlight;
+  }
 }
 
 .divider {
@@ -55,6 +55,16 @@ body {
   vertical-align: middle;
   position: relative;
   background: $shadow;
+}
+
+.cursor {
+  transition: all 0.3s;
+  color: $text;
+
+  &:hover {
+    color: $highlight;
+    cursor: pointer;
+  }
 }
 
 a.link {
@@ -74,6 +84,13 @@ a.link {
 
 .text-bold {
   font-weight: bold;
+}
+
+.icon-img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .d-flex {
@@ -125,7 +142,19 @@ a.link {
 }
 
 .mt-3 {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
+}
+
+.mb-1 {
+  margin-bottom: 0.5em;
+}
+
+.mb-2 {
+  margin-bottom: 1em;
+}
+
+.mb-3 {
+  margin-bottom: 1.5em;
 }
 
 .slide-fade-enter-active {
