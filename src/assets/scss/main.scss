@@ -121,6 +121,10 @@ a.link {
   margin-left: 1.5em;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mr-1 {
   margin-right: 0.5em;
 }
@@ -166,5 +170,27 @@ a.link {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateY(-10px);
+  opacity: 0;
+}
+
+.slide-right-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-right-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(-400px);
+}
+
+.fade-enter-active {
+  transition: all 0.3s ease;
+}
+.fade-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }

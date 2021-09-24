@@ -25,7 +25,7 @@ export function isSmOrAboveScreen() {
     return false
 }
 
-export function isMdOrAboveScreen() {
+export function isMdOrAboveScreen(window) {
     if (window.innerWidth >= BREAKPOINTS.md) return true
     return false
 }
