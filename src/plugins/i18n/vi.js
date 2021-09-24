@@ -17,6 +17,9 @@ export default {
       kid_warning: "Tuổi từ 2 - 12",
       baby_warning: "Dưới 2 tuổi",
     },
+    footer: {
+      info1: "Bài tập cho môn học 2122I_INT3139, viết bởi @trannguyen61"
+    }
   },
   places: {
     hanoi: "Hà Nội",

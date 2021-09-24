@@ -17,6 +17,9 @@ export default {
       kid_warning: "From age 2 - 12",
       baby_warning: "Below age of 2",
     },
+    footer: {
+      info1: "Fall 2122I_INT3139 Assignment by @trannguyen61"
+    }
   },
   places: {
     hanoi: "Hanoi",

@@ -11,6 +11,11 @@
     <main>
       <router-view />
     </main>
+    <footer>
+      <div class="container container--md d-flex align-items-center justify-content-center">
+        <footer-section />
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -19,11 +24,13 @@ import { ref } from "vue";
 
 import NavBar from "./components/shared/NavBar.vue";
 import SideBar from "./components/shared/SideBar.vue";
+import FooterSection from "@/components/shared/FooterSection.vue"
 
 export default {
   components: {
     NavBar,
     SideBar,
+    FooterSection
   },
 
   setup() {
