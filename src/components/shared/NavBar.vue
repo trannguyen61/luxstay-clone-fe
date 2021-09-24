@@ -30,7 +30,10 @@
       </div>
     </div>
 
-    <div v-if="checkIsMdOrAboveScreen" class="navbar--info d-flex align-items-center">
+    <div
+      v-if="checkIsMdOrAboveScreen"
+      class="navbar--info d-flex align-items-center"
+    >
       <router-link class="link text-bold navbar--link" to="#">{{
         $t("shared.login")
       }}</router-link>
@@ -41,7 +44,11 @@
       <setting-picker />
     </div>
 
-    <i v-else class="el-icon-menu cursor menu-icon" @click="$emit('toggle-sidebar')"></i>
+    <i
+      v-else
+      class="el-icon-menu cursor menu-icon"
+      @click="$emit('toggle-sidebar')"
+    ></i>
   </div>
 </template>
 
@@ -51,7 +58,7 @@ import { ref, computed } from "vue";
 import GuestPicker from "./GuestPicker.vue";
 import SettingPicker from "./SettingPicker.vue";
 
-import { isMdOrAboveScreen, isXsScreen } from '../../helpers/mediaHelpers'
+import { isMdOrAboveScreen, isXsScreen } from "@/helpers/mediaHelpers";
 
 export default {
   components: {
@@ -59,7 +66,7 @@ export default {
     SettingPicker,
   },
 
-  emits: ['toggle-sidebar'],
+  emits: ["toggle-sidebar"],
 
   setup() {
     let locationSearch = ref("");
@@ -69,15 +76,15 @@ export default {
       console.log(guestObj);
     }
 
-    let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window))
-    let checkIsXsScreen = computed(() => isXsScreen(window))
+    let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window));
+    let checkIsXsScreen = computed(() => isXsScreen(window));
 
     return {
       locationSearch,
       dateRangeSearch,
       pickGuest,
       checkIsMdOrAboveScreen,
-      checkIsXsScreen
+      checkIsXsScreen,
     };
   },
 };

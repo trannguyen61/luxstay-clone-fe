@@ -1,0 +1,40 @@
+.home {
+  &--section {
+    margin-top: 42px;
+  }
+}
+
+.el-carousel {
+  border-radius: 20px;
+}
+
+.banner {
+  max-width: 100%;
+  height: auto;
+}
+
+.place-link {
+  height: 100%;
+  padding: 0 10px;
+
+  .place--title {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  &--img {
+    border-radius: 15px;
+    height: 100%;
+    object-fit: cover;
+    width: 250px;
+  }
+}
+
+.place-slick {
+  height: 300px;
+}

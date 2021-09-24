@@ -1,5 +1,8 @@
 <template>
-  <div class="setting-picker ml-2" :class="checkIsMdOrAboveScreen ? '' : 'setting-picker--mobile'">
+  <div
+    class="setting-picker ml-2"
+    :class="checkIsMdOrAboveScreen ? '' : 'setting-picker--mobile'"
+  >
     <div
       class="setting-picker-btn d-flex align-items-center"
       @click="toggleDialog"
@@ -61,10 +64,10 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
-import { i18n } from "../../plugins/i18n/i18n";
-import { CURRENCIES_ARR } from "../../consts/billingConsts";
-import { LANGUAGES_ARR } from "../../consts/sharedConsts";
-import { isMdOrAboveScreen } from '../../helpers/mediaHelpers'
+import { i18n } from "@/plugins/i18n/i18n";
+import { CURRENCIES_ARR } from "@/consts/billingConsts";
+import { LANGUAGES_ARR } from "@/consts/sharedConsts";
+import { isMdOrAboveScreen } from "@/helpers/mediaHelpers";
 
 export default {
   setup() {
@@ -88,7 +91,7 @@ export default {
       i18n.global.locale = lang;
     }
 
-    let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window))
+    let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window));
 
     return {
       currency,
