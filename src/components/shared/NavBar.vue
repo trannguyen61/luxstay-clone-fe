@@ -11,7 +11,7 @@
             <i class="el-input__icon el-icon-search"></i>
           </template>
         </el-input>
-        <div class="divider" />
+        <div v-if="!checkIsXsScreen" class="divider" />
         <el-date-picker
           v-if="!checkIsXsScreen"
           v-model="dateRangeSearch"

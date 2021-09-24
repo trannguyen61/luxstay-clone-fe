@@ -1,13 +1,17 @@
 <template>
-  <el-container>
-    <el-header class="container container--md w-100">
-      <nav-bar @toggleSidebar="toggleSidebar" />
+  <div class="app">
+    <header>
+      <div class="navbar-container">
+        <div class="container container--md wmd-100-wmd-90 header">
+          <nav-bar @toggleSidebar="toggleSidebar" />
+        </div>
+      </div>
       <side-bar :isOpened="isSidebarOpened" @toggleSidebar="toggleSidebar" />
-    </el-header>
-    <el-main>
+    </header>
+    <main>
       <router-view />
-    </el-main>
-  </el-container>
+    </main>
+  </div>
 </template>
 
 <script>

@@ -8,6 +8,11 @@ body {
   color: $text;
 }
 
+main {
+  margin-top: 72px;
+  padding-top: 15px;
+}
+
 .card {
   border: 1px solid $light;
   border-radius: $border-radius;
@@ -119,6 +124,18 @@ p {
 
 .w-100 {
   width: 100%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.wmd-100-wmd-90 {
+  width: 100%;
+
+  @media screen and (max-width: $md) {
+    width: 90%;
+  }
 }
 
 .h-100 {
