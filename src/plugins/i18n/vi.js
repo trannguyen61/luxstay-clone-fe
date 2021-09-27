@@ -6,6 +6,20 @@ export default {
     cancel: "Hủy",
     done: "Áp dụng",
     or: "hoặc",
+    filter: "Sắp xếp",
+    select: "Lựa chọn",
+    asc: "Tăng dần",
+    desc: "Giảm dần",
+    bedroom: "phòng ngủ",
+    night: "đêm",
+    type: {
+      apartment: "Chung cư",
+    },
+    currency: {
+      VND: "đ",
+      USD: "đô",
+    },
+
     navbar: {
       search: "Tìm kiếm",
       from_date: "Từ ngày",
@@ -18,8 +32,8 @@ export default {
       baby_warning: "Dưới 2 tuổi",
     },
     footer: {
-      info1: "Bài tập cho môn học 2122I_INT3139, viết bởi @trannguyen61"
-    }
+      info1: "Bài tập cho môn học 2122I_INT3139, viết bởi trannguyen61",
+    },
   },
   places: {
     hanoi: "Hà Nội",
@@ -38,6 +52,11 @@ export default {
       places: "Địa điểm nổi bật",
       places_info:
         "Cùng Luxstay bắt đầu chuyến hành trình chinh phục thế giới của bạn",
+    },
+    search: {
+      places:
+        "Lựa chọn những homestay hoàn hảo tại các điểm đến được yêu thích nhất",
+      homestay: "Homestay trên trang của chúng tôi",
     },
   },
 };

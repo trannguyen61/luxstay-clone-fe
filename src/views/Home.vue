@@ -10,7 +10,7 @@
       </el-carousel-item>
     </el-carousel>
 
-    <div class="home--section">
+    <div class="section-title">
       <h2 class="m-0 mb-3">{{ $t("pages.home.greetings") }}</h2>
       <p class="m-0 mb-2">{{ $t("pages.home.greetings_info_1") }}</p>
       <p class="m-0">
@@ -25,7 +25,7 @@
       </p>
     </div>
 
-    <div class="home--section">
+    <div class="section-title">
       <h2 class="m-0 mb-3">{{ $t("pages.home.places") }}</h2>
       <p class="m-0">{{ $t("pages.home.places_info") }}</p>
     </div>

@@ -1,0 +1,26 @@
+@import "../consts.scss";
+
+.search {
+  .place-link {
+    &--img {
+      width: 292px;
+    }
+  }
+  
+  .place-slick {
+    height: 365px;
+  }  
+}
+
+.el-select {
+  font-size: 16px;
+  .el-input__inner {
+    padding-right: 35px;
+    padding-left: 100px;
+  }
+
+  .el-input__prefix {
+    padding: 0 10px;
+    color: $secondary;
+  }
+}

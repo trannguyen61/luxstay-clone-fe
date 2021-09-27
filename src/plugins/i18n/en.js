@@ -6,6 +6,19 @@ export default {
     cancel: "Cancel",
     done: "Done",
     or: "or",
+    filter: "Filter",
+    select: "Select",
+    asc: "Ascending",
+    desc: "Descending",
+    bedroom: "bedroom",
+    night: "night",
+    type: {
+      apartment: "Apartment",
+    },
+    currency: {
+      VND: "VND",
+      USD: "USD",
+    },
     navbar: {
       search: "Search",
       from_date: "From",
@@ -18,8 +31,8 @@ export default {
       baby_warning: "Below age of 2",
     },
     footer: {
-      info1: "Fall 2122I_INT3139 Assignment by @trannguyen61"
-    }
+      info1: "Fall 2122I_INT3139 Assignment by trannguyen61",
+    },
   },
   places: {
     hanoi: "Hanoi",
@@ -38,6 +51,10 @@ export default {
       places: "Top Destinations",
       places_info:
         '"See the world: It\'s more fantastic than any dream made or paid for in factories" - Ray Bradbury',
+    },
+    search: {
+      places: "Check our selection of homestays in featured destinations.",
+      homestay: "Homestays on our site",
     },
   },
 };

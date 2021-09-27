@@ -6,6 +6,8 @@ body {
   font-weight: 500;
   font-size: 1rem;
   color: $text;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 main {
@@ -115,11 +117,18 @@ p {
   border-radius: 50%;
 }
 
+.grid-center {
+  display: grid;
+  justify-items: center;
+}
+
 .container {
+  padding: 0 1.25rem;
+  margin: auto;
+
   @media screen and (min-width: $md) {
     padding: 0 2.8rem;
   }
-  margin: auto;
 
   &--md {
     @media screen and (min-width: $md) {
@@ -130,6 +139,45 @@ p {
   &--sm {
     max-width: calc(1296px + 5.6rem);
   }
+}
+
+.row {
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  display: flex;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.col-lg-20,
+.col-md-3,
+.col-xs-6 {
+  flex: 0 0 auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+}
+
+.col-xs-6 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+.col-md-3 {
+  @media screen and (min-width: $md) {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+}
+
+.col-lg-20 {
+  @media screen and (min-width: $lg) {
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+}
+
+.section-title {
+  margin-top: 42px;
 }
 
 .w-100 {
@@ -161,7 +209,11 @@ p {
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
+}
+
+.d-inline-block {
+  display: inline-block;
 }
 
 .justify-content-between {
@@ -170,6 +222,10 @@ p {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: end;
 }
 
 .align-items-center {
@@ -239,6 +295,14 @@ p {
 
 .mb-3 {
   margin-bottom: 1.5em;
+}
+
+.mb-4 {
+  margin-bottom: 2em;
+}
+
+.mb-5 {
+  margin-bottom: 2.5em;
 }
 
 .slide-fade-enter-active {
