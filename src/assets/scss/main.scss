@@ -305,6 +305,58 @@ p {
   margin-bottom: 2.5em;
 }
 
+.el-checkbox-button__inner {
+  border: 1px solid $light !important;
+  border-radius: 3px;
+
+  &:hover {
+    color: $highlight;
+  }
+}
+
+.el-checkbox-button.is-checked .el-checkbox-button__inner {
+  background-color: $highlight;
+  box-shadow: -1px 0 0 0 $highlight;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.el-checkbox__input.is-focus .el-checkbox__inner {
+  border-color: $highlight;
+}
+
+.el-checkbox.is-checked,
+.el-checkbox__input.is-checked {
+  .el-checkbox__label {
+    color: $highlight;
+  }
+
+  .el-checkbox__inner {
+    background-color: $highlight;
+    border-color: $highlight;
+  }
+}
+
+.el-button.el-button--default {
+  font-weight: normal;
+  font-family: inherit;
+
+  &:hover {
+    color: $highlight;
+    background-color: white;
+    border-color: $light;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $highlight;
+    border-color: $highlight;
+    color: white;
+  }
+}
+
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }

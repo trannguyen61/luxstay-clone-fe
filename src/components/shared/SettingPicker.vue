@@ -64,6 +64,8 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
+import useDialog from "@/composables/useDialog.js"
+
 import { i18n } from "@/plugins/i18n/i18n";
 import { CURRENCIES_ARR } from "@/consts/billingConsts";
 import { LANGUAGES_ARR } from "@/consts/sharedConsts";
@@ -79,11 +81,7 @@ export default {
       store.commit("changeCurrency", curr);
     }
 
-    let isDialogOpened = ref(false);
-
-    function toggleDialog() {
-      isDialogOpened.value = !isDialogOpened.value;
-    }
+    let { isDialogOpened, toggleDialog } = useDialog()
 
     let locale = computed(() => i18n.global.locale);
 

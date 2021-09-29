@@ -1,5 +1,7 @@
 <template>
-  <div class="search container container--md">
+  <div class="container container--md search">
+    <filter-bar></filter-bar>
+    
     <div class="section-title">
       <h3 class="m-0 mb-3">{{ $t("pages.search.places") }}</h3>
     </div>
@@ -83,6 +85,7 @@ import { useStore } from "vuex";
 
 import SlickCarousel from "@/components/shared/SlickCarousel.vue";
 import RoomPreview from "@/components/search/RoomPreview.vue";
+import FilterBar from "@/components/search/FilterBar.vue"
 
 import { INTERESTING_PLACES } from "@/consts/mediaConsts.js";
 import { FILTER_OPTIONS, PAGINATION_SIZE } from "@/consts/sharedConsts.js";
@@ -97,7 +100,7 @@ import { ROOM_PREVIEW_LIST } from "@/test/testData.js";
 export default {
   name: "Search",
 
-  components: { SlickCarousel, RoomPreview },
+  components: { SlickCarousel, RoomPreview, FilterBar },
 
   setup() {
     const store = useStore();

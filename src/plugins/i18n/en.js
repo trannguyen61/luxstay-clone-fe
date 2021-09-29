@@ -33,6 +33,13 @@ export default {
     footer: {
       info1: "Fall 2122I_INT3139 Assignment by trannguyen61",
     },
+    options: {
+      easy_cancel: "Easy canceling",
+      quick_book: "Quick booking",
+      shocking_price: "Shocking price",
+      place: "Place",
+      type: "Type"
+    }
   },
   places: {
     hanoi: "Hanoi",

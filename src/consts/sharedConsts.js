@@ -20,4 +20,19 @@ export const FILTER_OPTIONS = [
   },
 ];
 
+export const DETAIL_FILTER_OPTIONS = [
+  {
+    value: "easy_cancel",
+    label: "easy_cancel"
+  },
+  {
+    value: "quick_book",
+    label: "quick_book"
+  },
+  {
+    value: "shocking_price",
+    label: "shocking_price"
+  }
+]
+
 export const PAGINATION_SIZE = 1;

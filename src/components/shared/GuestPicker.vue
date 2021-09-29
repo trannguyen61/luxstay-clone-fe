@@ -42,16 +42,13 @@
 
 <script>
 import { ref, computed } from "vue";
+import useDialog from "@/composables/useDialog.js"
 
 export default {
   emits: ["pick-guest"],
 
   setup(_, { emit }) {
-    let isDialogOpened = ref(false);
-
-    function toggleDialog() {
-      isDialogOpened.value = !isDialogOpened.value;
-    }
+    let { isDialogOpened, toggleDialog } = useDialog()
 
     let grownupGuests = ref(0);
     let kidGuests = ref(0);

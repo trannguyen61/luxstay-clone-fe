@@ -34,6 +34,14 @@ export default {
     footer: {
       info1: "Bài tập cho môn học 2122I_INT3139, viết bởi trannguyen61",
     },
+    options: {
+      easy_cancel: "Hủy phòng linh hoạt",
+      quick_book: "Đặt phòng nhanh chóng",
+      shocking_price: "Giá ưu đãi",
+      place: "Vị trí",
+      type: "Loại"
+    }
+
   },
   places: {
     hanoi: "Hà Nội",

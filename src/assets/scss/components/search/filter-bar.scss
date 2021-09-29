@@ -1,0 +1,17 @@
+@import "../../consts.scss";
+
+.filter-bar {
+  position: fixed;
+  top: 73px;
+  background: white;
+  width: 100%;
+  z-index: 10;
+  padding: 12px 0;
+  display: flex;
+
+  .filter-dialog {
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
