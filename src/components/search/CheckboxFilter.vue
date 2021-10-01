@@ -7,7 +7,16 @@
     @hide="done"
   >
     <template #reference>
-      <el-button>{{ title }}</el-button>
+      <el-button :class="checkList.length > 0 ? 'el-button--active' : ''">
+        {{ title }}
+        <font-awesome-icon
+          v-if="checkList.length > 0"
+          class="ml-1"
+          icon="times-circle"
+          color="white"
+          @click="cancel"
+        />
+      </el-button>
     </template>
     <div class="filter-dialog">
       <el-checkbox-group v-model="checkList">
@@ -44,7 +53,7 @@ export default {
     },
   },
 
-  emits: ["choose-filter"],
+  emits: ["choose-filters"],
 
   setup(props, context) {
     let checkList = ref([]);

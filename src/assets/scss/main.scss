@@ -357,6 +357,18 @@ p {
   }
 }
 
+.el-button--active {
+  background-color: $highlight;
+  border-color: $highlight;
+  color: white;
+
+  &.el-button.el-button--default:hover {
+    background-color: $highlight;
+    border-color: $highlight;
+    color: white;
+  }
+}
+
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }

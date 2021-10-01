@@ -39,7 +39,23 @@ export default {
       quick_book: "Đặt phòng nhanh chóng",
       shocking_price: "Giá ưu đãi",
       place: "Vị trí",
-      type: "Loại"
+      type: "Loại",
+      price_a_night: "Giá phòng (1 đêm)",
+      price: "Giá chỗ ở",
+      min_price: "Thấp nhất",
+      max_price: "Cao nhất",
+      more_filters: "Thêm bộ lọc",
+      bed: "Giường",
+      bedroom: "Phòng ngủ",
+      bathroom: "Phòng tắm",
+      service: "Phục vụ",
+      rooms_and_beds: "Phòng và giường ngủ",
+      "free-breakfast": "Bữa sáng miễn phí",
+      "airport-fetching": "Đón từ sân bay",
+      "vehicle-for-lease": "Cho thuê phương tiện",
+      shopping: "Mua sắm và ăn uống",
+      cafe: "Quán cà phê",
+      bar: "Bar"
     }
 
   },

@@ -35,4 +35,37 @@ export const DETAIL_FILTER_OPTIONS = [
   }
 ]
 
+export const DETAIL_GENERAL_FILTER_OPTIONS = [
+  {
+    name: "service",
+    items: [
+      {
+        id: 1,
+        name: "free-breakfast"
+      },
+      {
+        id: 2,
+        name: "airport-fetching"
+      },
+      {
+        id: 3,
+        name: "vehicle-for-lease"
+      }
+    ]
+  },
+  {
+    name: "shopping",
+    items: [
+      {
+        id: 1,
+        name: "cafe"
+      },
+      {
+        id: 2,
+        name: "bar"
+      }
+    ]
+  }
+]
+
 export const PAGINATION_SIZE = 1;

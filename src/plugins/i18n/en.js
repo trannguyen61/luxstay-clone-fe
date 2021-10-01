@@ -38,7 +38,23 @@ export default {
       quick_book: "Quick booking",
       shocking_price: "Shocking price",
       place: "Place",
-      type: "Type"
+      type: "Type",
+      price_a_night: "Price (a night)",
+      price: "Price",
+      min_price: "Min price",
+      max_price: "Max price",
+      more_filters: "More filters",
+      bed: "Bed",
+      bedroom: "Bedroom",
+      bathroom: "Bathroom",
+      rooms_and_beds: "Rooms and beds",
+      service: "Services",
+      "free-breakfast": "Free breakfast",
+      "airport-fetching": "Fetching from airport",
+      "vehicle-for-lease": "Vehicles for lease",
+      shopping: "Shopping",
+      cafe: "Cafeteria",
+      bar: "Bar"
     }
   },
   places: {

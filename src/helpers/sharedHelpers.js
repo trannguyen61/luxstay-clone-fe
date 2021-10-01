@@ -13,3 +13,9 @@ export function getFilterButtonTitle(
   }
   return i18n.global.t(`shared.options.${type}`);
 }
+
+export function getPriceFilterButtonTitle(array, currency) {
+  return array[0] > 0 || array[1] < 50000000
+    ? `${currency} ${array[0]} - ${array[1]}`
+    : i18n.global.t(`shared.options.price`);
+}

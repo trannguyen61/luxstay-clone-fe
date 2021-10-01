@@ -15,3 +15,26 @@
     overflow-x: hidden;
   }
 }
+
+.price-slider {
+  width: calc(100% - 20px);
+  margin: auto;
+
+  .el-slider__bar {
+    background-color: $highlight;
+  }
+
+  .el-slider__button {
+    border: solid 2px $highlight;
+  }
+}
+
+.price-change {
+  width: 100%;
+  min-width: 150px;
+margin: 5px;
+padding: 5px;
+border: 1px solid $light;
+border-radius: 5px;
+}
+
