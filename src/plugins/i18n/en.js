@@ -12,6 +12,7 @@ export default {
     desc: "Descending",
     bedroom: "bedroom",
     night: "night",
+    guest_name: "guest(s)",
     type: {
       apartment: "Apartment",
     },

@@ -12,6 +12,7 @@ export default {
     desc: "Giảm dần",
     bedroom: "phòng ngủ",
     night: "đêm",
+    guest_name: "khách",
     type: {
       apartment: "Chung cư",
     },

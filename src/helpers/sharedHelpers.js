@@ -19,3 +19,9 @@ export function getPriceFilterButtonTitle(array, currency) {
     ? `${currency} ${array[0]} - ${array[1]}`
     : i18n.global.t(`shared.options.price`);
 }
+
+export function getGuestPickerButtonTitle(guestNumber) {
+  return guestNumber > 0
+    ? `${guestNumber} ${i18n.global.t("shared.guest_name")}`
+    : i18n.global.t("shared.navbar.guest_number");
+}

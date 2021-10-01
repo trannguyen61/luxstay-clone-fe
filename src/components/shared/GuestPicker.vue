@@ -2,7 +2,7 @@
   <div class="guest-picker">
     <div class="guest-picker-btn" @click="toggleDialog">
       <i class="el-icon-user mr-1"></i>
-      <p class="m-0">{{ $t("shared.navbar.guest_number") }}</p>
+      <p class="m-0">{{ title }}</p>
     </div>
 
     <transition name="slide-fade" mode="out-in">
@@ -42,13 +42,15 @@
 
 <script>
 import { ref, computed } from "vue";
-import useDialog from "@/composables/useDialog.js"
+import useDialog from "@/composables/useDialog.js";
+
+import { getGuestPickerButtonTitle } from "@/helpers/sharedHelpers.js";
 
 export default {
   emits: ["pick-guest"],
 
   setup(_, { emit }) {
-    let { isDialogOpened, toggleDialog } = useDialog()
+    let { isDialogOpened, toggleDialog } = useDialog();
 
     let grownupGuests = ref(0);
     let kidGuests = ref(0);
@@ -79,6 +81,8 @@ export default {
       grownupGuests.value = 0;
       kidGuests.value = 0;
       babyGuests.value = 0;
+
+      isDialogOpened.value = false;
     }
 
     function done() {
@@ -92,6 +96,8 @@ export default {
       isDialogOpened.value = false;
     }
 
+    let title = computed(() => getGuestPickerButtonTitle(totalGuests.value));
+
     return {
       isDialogOpened,
       toggleDialog,
@@ -101,6 +107,7 @@ export default {
       inputs,
       cancel,
       done,
+      title,
     };
   },
 };
