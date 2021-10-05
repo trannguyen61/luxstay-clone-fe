@@ -68,4 +68,11 @@ export const DETAIL_GENERAL_FILTER_OPTIONS = [
   }
 ]
 
+const AMENITY_TYPES_ID = {
+  facility: 6,
+  kitchen: 2,
+  entertainment: 3,
+  general: 5
+}
+
 export const PAGINATION_SIZE = 1;

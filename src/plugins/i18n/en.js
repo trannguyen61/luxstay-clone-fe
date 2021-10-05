@@ -19,6 +19,7 @@ export default {
     guest_name: "guest(s)",
     read_more: "Read more",
     collapse: "Collapse",
+    after: "After",
     type: {
       apartment: "Apartment",
     },
@@ -88,7 +89,21 @@ export default {
     },
     room: {
       go_to_map: "Go to map",
-      other: "Others"
+      other: "Others",
+      amenity: "Amenity",
+      amenity_description: "Amenities and services at the accommodation",
+      facility: "Facilities",
+      kitchen_facility: "Kitchen facilities",
+      entertainment: "Entertainment",
+      price: "Price",
+      price_date: "Date",
+      price_description: "Price may changes in weekends or holidays",
+      nightly_price: "Nightly price",
+      weekend_price: "Weekend price",
+      additional_guests_fee: "Additional guests fee",
+      additional_children_fee: "Additional children fee",
+      minimum_stay: "Minimum stay",
+      maximum_stay: "Maximum stay"
     }
   },
 };

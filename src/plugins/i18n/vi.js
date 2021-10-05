@@ -19,6 +19,7 @@ export default {
     guest_name: "khách",
     read_more: "Đọc thêm",
     collapse: "Thu gọn",
+    after: "Sau",
     type: {
       apartment: "Chung cư",
     },
@@ -91,7 +92,21 @@ export default {
     },
     room: {
       go_to_map: "Xem bản đồ",
-      other: "Khác"
+      other: "Khác",
+      amenity: "Tiện nghi chỗ ở",
+      amenity_description: "Giới thiệu về các tiện nghi và dịch vụ tại nơi lưu trú",      
+      facility: "Tiện ích",
+      kitchen_facility: "Tiện ích nhà bếp",
+      entertainment: "Giải trí",
+      price: "Giá phòng",
+      price_date: "Tiêu chí",
+      price_description: "Giá có thể tăng vào cuối tuần hoặc ngày lễ",
+      nightly_price: "Thứ hai - Thứ năm",
+      weekend_price: "Thứ sáu - Chủ nhật",
+      additional_guests_fee: "Phí khách tăng thêm",
+      additional_children_fee: "Phí trẻ em tăng thêm",
+      minimum_stay: "Số đêm tối thiểu",
+      maximum_stay: "Số đêm tối đa"
     }
   },
 };

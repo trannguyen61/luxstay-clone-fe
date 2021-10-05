@@ -16,6 +16,10 @@
   }
 }
 
+.el-breadcrumb__inner a:hover, .el-breadcrumb__inner.is-link:hover {
+    color: $highlight;
+}
+
 .hideable-text {
   &--text {
     overflow: hidden;

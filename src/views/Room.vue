@@ -13,6 +13,10 @@
           :items="DETAILED_ROOM.destinations.data"
         ></place-breadcrumb>
         <room-description :room="DETAILED_ROOM"></room-description>
+        <div class="spacer"></div>
+        <room-amenity :amenity="DETAILED_ROOM.amenities.data" :amenityTypes="DETAILED_ROOM.amenityTypes.data"></room-amenity>
+        <div class="spacer"></div>
+        <room-price :price="DETAILED_ROOM.price.data"></room-price>
       </el-col>
       <el-col :span="24" :md="8"></el-col>
     </el-row>
@@ -23,11 +27,13 @@
 import SlickSlider from "@/components/room/SlickSlider.vue";
 import PlaceBreadcrumb from "@/components/room/PlaceBreadcrumb.vue";
 import RoomDescription from "@/components/room/RoomDescription.vue";
+import RoomAmenity from "@/components/room/RoomAmenity.vue";
+import RoomPrice from "@/components/room/RoomPrice.vue";
 
 import { IMAGES_SLICK_ARRAY, DETAILED_ROOM } from "@/test/testData.js";
 
 export default {
-  components: { SlickSlider, PlaceBreadcrumb, RoomDescription },
+  components: { SlickSlider, PlaceBreadcrumb, RoomDescription, RoomAmenity, RoomPrice },
 
   setup() {
     return {
