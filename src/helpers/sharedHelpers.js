@@ -25,3 +25,18 @@ export function getGuestPickerButtonTitle(guestNumber) {
     ? `${guestNumber} ${i18n.global.t("shared.guest_name")}`
     : i18n.global.t("shared.navbar.guest_number");
 }
+
+export function convertCurrency(price, locale) {
+  console.log(price, locale)
+  if (locale == "vi") {
+    return price.toLocaleString('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+  } else if (locale == "en") {
+    return price.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+  }
+}
