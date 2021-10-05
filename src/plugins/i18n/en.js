@@ -11,8 +11,14 @@ export default {
     asc: "Ascending",
     desc: "Descending",
     bedroom: "bedroom",
+    bedrooms: "bedroom(s)",
+    bed: "bed(s)",
+    bathrooms: "bathroom(s)",
+    maximum: "Maximum",
     night: "night",
     guest_name: "guest(s)",
+    read_more: "Read more",
+    collapse: "Collapse",
     type: {
       apartment: "Apartment",
     },
@@ -80,5 +86,9 @@ export default {
       places: "Check our selection of homestays in featured destinations.",
       homestay: "Homestays on our site",
     },
+    room: {
+      go_to_map: "Go to map",
+      other: "Others"
+    }
   },
 };

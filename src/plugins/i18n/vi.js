@@ -11,8 +11,14 @@ export default {
     asc: "Tăng dần",
     desc: "Giảm dần",
     bedroom: "phòng ngủ",
+    bedrooms: "phòng ngủ",
+    beds: "giường",
+    bathrooms: "phòng tắm",
+    maximum: " Tối đa",
     night: "đêm",
     guest_name: "khách",
+    read_more: "Đọc thêm",
+    collapse: "Thu gọn",
     type: {
       apartment: "Chung cư",
     },
@@ -83,5 +89,9 @@ export default {
         "Lựa chọn những homestay hoàn hảo tại các điểm đến được yêu thích nhất",
       homestay: "Homestay trên trang của chúng tôi",
     },
+    room: {
+      go_to_map: "Xem bản đồ",
+      other: "Khác"
+    }
   },
 };

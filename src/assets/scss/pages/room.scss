@@ -1,0 +1,44 @@
+@import "../consts.scss";
+
+.room-page {
+  &--host {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--general-description {
+    margin-bottom: 40px;
+  }
+}
+
+.hideable-text {
+  &--text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 300px;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 20%, white);
+      position: absolute;
+    }
+  }
+}
+
+.hideable-text.hideable-text--shown {
+  .hideable-text--text {
+    max-height: 100%;
+
+    &::before {
+      opacity: 0;
+    }
+  }
+}

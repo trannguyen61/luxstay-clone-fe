@@ -93,6 +93,14 @@ a.link {
   &:hover {
     color: $highlight;
   }
+
+  &--highlight {
+    color: $highlight;
+
+    &:hover {
+      color: $text;
+    }
+  }
 }
 
 p {
