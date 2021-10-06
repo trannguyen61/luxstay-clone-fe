@@ -100,13 +100,28 @@ export default {
       entertainment: "Giải trí",
       price: "Giá phòng",
       price_date: "Tiêu chí",
+      time: "Thời gian",
       price_description: "Giá có thể tăng vào cuối tuần hoặc ngày lễ",
       nightly_price: "Thứ hai - Thứ năm",
       weekend_price: "Thứ sáu - Chủ nhật",
       additional_guests_fee: "Phí khách tăng thêm",
       additional_children_fee: "Phí trẻ em tăng thêm",
       minimum_stay: "Số đêm tối thiểu",
-      maximum_stay: "Số đêm tối đa"
+      maximum_stay: "Số đêm tối đa",
+      availability: "Thời gian có phòng trống",
+      availability_description: "Giá có thể tăng vào cuối tuần hoặc ngày lễ",
+      repay_rules: "Nội quy và chính sách về chỗ ở",
+      cancel_rules: "Chính sách hủy phòng",
+      repay_rules_description: "Miễn phí hủy phòng trong vòng 48h sau khi đặt phòng thành công và trước 5 ngày so với thời gian check-in. Sau đó, hủy phòng trước 5 ngày so với thời gian check-in, được hoàn lại 100% tổng số tiền đã trả (trừ phí dịch vụ).",
+      rules: {
+        book_success: "Đặt phòng thành công",
+        repay_100: "Hoàn tiền 100%",
+        after_48: "Sau 48h",
+        repay_100_no_service: "Hoàn tiền 100% (trừ phí dịch vụ)",
+        "5_day_to_checkin": "5 ngày trước check-in",
+        repay_50: "Hoàn 50% (trừ phí đêm đầu tiên, phí dịch vụ và các phí kèm theo)",
+        checkin: "Check-in"
+      }
     }
   },
 };

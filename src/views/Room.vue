@@ -17,6 +17,10 @@
         <room-amenity :amenity="DETAILED_ROOM.amenities.data" :amenityTypes="DETAILED_ROOM.amenityTypes.data"></room-amenity>
         <div class="spacer"></div>
         <room-price :price="DETAILED_ROOM.price.data"></room-price>
+        <div class="spacer"></div>
+        <room-availability :avai="ROOM_AVAILABILITY['1']"></room-availability>
+        <div class="spacer"></div>
+        <room-repay-rules :time="DETAILED_ROOM.price.data"></room-repay-rules>
       </el-col>
       <el-col :span="24" :md="8"></el-col>
     </el-row>
@@ -29,16 +33,19 @@ import PlaceBreadcrumb from "@/components/room/PlaceBreadcrumb.vue";
 import RoomDescription from "@/components/room/RoomDescription.vue";
 import RoomAmenity from "@/components/room/RoomAmenity.vue";
 import RoomPrice from "@/components/room/RoomPrice.vue";
+import RoomAvailability from "@/components/room/RoomAvailability.vue";
+import RoomRepayRules from "@/components/room/RoomRepayRules.vue";
 
-import { IMAGES_SLICK_ARRAY, DETAILED_ROOM } from "@/test/testData.js";
+import { IMAGES_SLICK_ARRAY, DETAILED_ROOM, ROOM_AVAILABILITY } from "@/test/testData.js";
 
 export default {
-  components: { SlickSlider, PlaceBreadcrumb, RoomDescription, RoomAmenity, RoomPrice },
+  components: { SlickSlider, PlaceBreadcrumb, RoomDescription, RoomAmenity, RoomPrice, RoomAvailability, RoomRepayRules },
 
   setup() {
     return {
       IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
+      ROOM_AVAILABILITY
     };
   },
 };

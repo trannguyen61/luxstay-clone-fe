@@ -97,13 +97,28 @@ export default {
       entertainment: "Entertainment",
       price: "Price",
       price_date: "Date",
+      time: "Time",
       price_description: "Price may changes in weekends or holidays",
       nightly_price: "Nightly price",
       weekend_price: "Weekend price",
       additional_guests_fee: "Additional guests fee",
       additional_children_fee: "Additional children fee",
       minimum_stay: "Minimum stay",
-      maximum_stay: "Maximum stay"
+      maximum_stay: "Maximum stay",
+      availability: "Availability",
+      availability_description: "Price may changes in weekends or holidays",
+      repay_rules: "House Rules & Cancellation Policy",
+      cancel_rules: "Cancellation policy",
+      repay_rules_description: "Guests will receive a full refund if cancel within 48 hours of booking and at least 5 days before check-in. If guests cancel after 48 hours of booking and at least 5 days before check-in, the service fee is non-refundable.",
+      rules: {
+        book_success: "Reservation Submit",
+        repay_100: "Full refund",
+        after_48: "48 hours later",
+        repay_100_no_service: "Full refund, minus the service fee",
+        "5_day_to_checkin": "5 days before check-in",
+        repay_50: "50% Refund, minus the first night and the service fee and other free",
+        checkin: "Check-in"
+      }
     }
   },
 };
