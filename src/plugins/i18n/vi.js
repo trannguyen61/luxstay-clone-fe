@@ -121,7 +121,8 @@ export default {
         "5_day_to_checkin": "5 ngày trước check-in",
         repay_50: "Hoàn 50% (trừ phí đêm đầu tiên, phí dịch vụ và các phí kèm theo)",
         checkin: "Check-in"
-      }
+      },
+      map: "Bản đồ"
     }
   },
 };

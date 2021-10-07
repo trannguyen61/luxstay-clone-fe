@@ -118,7 +118,8 @@ export default {
         "5_day_to_checkin": "5 days before check-in",
         repay_50: "50% Refund, minus the first night and the service fee and other free",
         checkin: "Check-in"
-      }
+      },
+      map: "Map"
     }
   },
 };
