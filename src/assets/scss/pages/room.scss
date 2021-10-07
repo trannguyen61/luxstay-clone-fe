@@ -16,8 +16,9 @@
   }
 }
 
-.el-breadcrumb__inner a:hover, .el-breadcrumb__inner.is-link:hover {
-    color: $highlight;
+.el-breadcrumb__inner a:hover,
+.el-breadcrumb__inner.is-link:hover {
+  color: $highlight;
 }
 
 .hideable-text {
@@ -43,6 +44,29 @@
 
     &::before {
       opacity: 0;
+    }
+  }
+}
+
+.book-room-card {
+  position: sticky;
+  top: 100px;
+  margin-top: 80px;
+  padding: 30px 25px;
+
+  .guest-picker {
+    width: 100%;
+
+    .guest-picker-btn {
+      padding: 10px;
+      border: 1.5px solid $light;
+      border-radius: 3px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .guest-picker-dialog {
+      top: 180px;
     }
   }
 }

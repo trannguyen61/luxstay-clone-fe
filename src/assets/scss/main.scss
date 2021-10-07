@@ -230,6 +230,10 @@ p {
   display: inline-block;
 }
 
+.d-inline {
+  display: inline;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
@@ -251,8 +255,8 @@ p {
 }
 
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .ml-1 {

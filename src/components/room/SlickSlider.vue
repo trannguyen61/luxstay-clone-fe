@@ -137,7 +137,6 @@ export default {
         .getElementsByClassName("slick-slider--items")[0];
       xPosition.value +=
         imgArrayWidths.value[currentImg.value - 1] + 2 * IMAGE_MARGIN;
-      console.log(currentImg.value);
       slickItems.style.transform = `translateX(${xPosition.value}px)`;
       currentImg.value -= 1;
     }

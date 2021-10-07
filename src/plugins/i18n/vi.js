@@ -122,7 +122,11 @@ export default {
         repay_50: "Hoàn 50% (trừ phí đêm đầu tiên, phí dịch vụ và các phí kèm theo)",
         checkin: "Check-in"
       },
-      map: "Bản đồ"
+      map: "Bản đồ",
+      price_a_night: "Giá thuê",
+      service_price: "Phí dịch vụ",
+      total: "Tổng tiền",
+      book_now: "Đặt ngay"
     }
   },
 };

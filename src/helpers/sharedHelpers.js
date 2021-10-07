@@ -27,7 +27,6 @@ export function getGuestPickerButtonTitle(guestNumber) {
 }
 
 export function convertCurrency(price, locale) {
-  console.log(price, locale)
   if (locale == "vi") {
     return price.toLocaleString('vi-VN', {
       style: 'currency',

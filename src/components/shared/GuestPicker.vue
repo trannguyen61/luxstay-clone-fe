@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import useDialog from "@/composables/useDialog.js";
 
 import { getGuestPickerButtonTitle } from "@/helpers/sharedHelpers.js";
@@ -49,7 +49,14 @@ import { getGuestPickerButtonTitle } from "@/helpers/sharedHelpers.js";
 export default {
   emits: ["pick-guest"],
 
-  setup(_, { emit }) {
+  props: {
+    defaultGuests: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+
+  setup(props, { emit }) {
     let { isDialogOpened, toggleDialog } = useDialog();
 
     let grownupGuests = ref(0);
@@ -97,6 +104,24 @@ export default {
     }
 
     let title = computed(() => getGuestPickerButtonTitle(totalGuests.value));
+
+    function getDefaultInput() {
+      if (props.defaultGuests.grownupGuests) {
+        grownupGuests.value = props.defaultGuests.grownupGuests
+      }
+
+      if (props.defaultGuests.kidGuests) {
+        kidGuests.value = props.defaultGuests.kidGuests
+      }
+
+      if (props.defaultGuests.babyGuests) {
+        babyGuests.value = props.defaultGuests.babyGuests
+      }
+    }
+
+    watch(() => props.defaultGuests, () => getDefaultInput())
+
+    onMounted(() => getDefaultInput())
 
     return {
       isDialogOpened,

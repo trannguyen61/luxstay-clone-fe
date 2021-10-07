@@ -119,7 +119,11 @@ export default {
         repay_50: "50% Refund, minus the first night and the service fee and other free",
         checkin: "Check-in"
       },
-      map: "Map"
+      map: "Map",
+      price_a_night: "Price",
+      service_price: "Service fee",
+      total: "Total",
+      book_now: "Book now"
     }
   },
 };
