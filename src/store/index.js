@@ -4,11 +4,15 @@ import { CURRENCIES_OBJ } from '../consts/billingConsts'
 
 export default createStore({
   state: {
-    currency: CURRENCIES_OBJ.vi.name
+    currency: CURRENCIES_OBJ.vi.name,
+    currentRoom: {}
   },
   mutations: {
     changeCurrency(state, value) {
       state.currency = value
+    },
+    changeCurrentRoom(state, value) {
+      state.currentRoom = value
     }
   },
   actions: {},

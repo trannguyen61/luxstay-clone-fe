@@ -44,14 +44,19 @@
       </div>
     </template>
 
-    <el-button class="el-button--active mt-3 w-100">
+    <el-button
+      class="el-button--active mt-3 w-100"
+      :disabled="notHasAllPropertiesToBook"
+      @click="bookRoom"
+    >
       {{ $t("pages.room.book_now") }}
     </el-button>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 import GuestPicker from "@/components/shared/GuestPicker";
 
@@ -69,36 +74,74 @@ export default {
       default: () => ({}),
     },
     defaultInput: {
-        type: Object,
-        default: () => ({})
-    }
+      type: Object,
+      default: () => ({}),
+    },
+    roomId: {
+      type: [String, Number],
+      default: ""
+    },
   },
+
+  emits: ["book-room"],
 
   components: { GuestPicker },
 
-  setup(props) {
+  setup(props, context) {
     let dateRangeSearch = ref([]);
     let guestSearch = ref({});
 
     function getDefaultInput() {
-        if (props.defaultInput.checkin && props.defaultInput.checkout) {
-            dateRangeSearch.value = [props.defaultInput.checkin, props.defaultInput.checkout]
-        }
+      if (props.defaultInput.checkin && props.defaultInput.checkout) {
+        dateRangeSearch.value = [
+          props.defaultInput.checkin,
+          props.defaultInput.checkout,
+        ];
+      }
 
-        if (props.defaultInput.grownupGuests || props.defaultInput.kidGuests || props.defaultInput.babyGuests) {
-            guestSearch.value = {
-                grownupGuests: parseInt(props.defaultInput.grownupGuests),
-                kidGuests: parseInt(props.defaultInput.kidGuests),
-                babyGuests: parseInt(props.defaultInput.babyGuests)
-            }
-        }
+      if (
+        props.defaultInput.grownupGuests ||
+        props.defaultInput.kidGuests ||
+        props.defaultInput.babyGuests
+      ) {
+        guestSearch.value = {
+          grownupGuests: parseInt(props.defaultInput.grownupGuests),
+          kidGuests: parseInt(props.defaultInput.kidGuests),
+          babyGuests: parseInt(props.defaultInput.babyGuests),
+        };
+      }
     }
 
     function pickGuest(guestObj) {
       guestSearch.value = guestObj;
     }
 
-    onMounted(() => getDefaultInput())
+    onMounted(() => getDefaultInput());
+
+    const router = useRouter();
+
+    function bookRoom() {
+      context.emit("book-room");
+
+      const searchQuery = {
+        roomId: props.roomId,
+        checkin: dateRangeSearch.value[0],
+        checkout: dateRangeSearch.value[1],
+        ...guestSearch.value,
+      };
+
+      router.push({
+        name: "Book",
+        query: searchQuery,
+      });
+    }
+
+    let notHasAllPropertiesToBook = computed(() => {
+      if (dateRangeSearch.value.length == 0 || !guestSearch.value.totalGuests || !props.roomId) {
+        return true;
+      }
+      return false;
+    });
 
     return {
       dateRangeSearch,
@@ -106,6 +149,8 @@ export default {
       pickGuest,
       locale: i18n.global.locale,
       convertCurrency,
+      bookRoom,
+      notHasAllPropertiesToBook,
     };
   },
 };

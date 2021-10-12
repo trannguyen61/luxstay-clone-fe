@@ -28,15 +28,22 @@
         <room-map :center="centerMap"></room-map>
       </el-col>
       <el-col :span="24" :md="8">
-        <book-room :defaultInput="filterQuery" :defaultPrice="DETAILED_ROOM.price.data" :detail="ROOM_DETAIL_PRICED.origin"></book-room>
+        <book-room
+          :defaultInput="filterQuery"
+          :defaultPrice="DETAILED_ROOM.price.data"
+          :detail="ROOM_DETAIL_PRICED.origin"
+          :roomId="DETAILED_ROOM.id"
+          @book-room="bookRoom"
+        ></book-room>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import { ref, computed, watch } from "vue";
-import { useRoute } from 'vue-router'
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 import SlickSlider from "@/components/room/SlickSlider.vue";
 import PlaceBreadcrumb from "@/components/room/PlaceBreadcrumb.vue";
@@ -52,7 +59,7 @@ import {
   IMAGES_SLICK_ARRAY,
   DETAILED_ROOM,
   ROOM_AVAILABILITY,
-  ROOM_DETAIL_PRICED
+  ROOM_DETAIL_PRICED,
 } from "@/test/testData.js";
 
 export default {
@@ -69,14 +76,20 @@ export default {
   },
 
   setup() {
-    const route = useRoute()
+    const route = useRoute();
 
-    let filterQuery = ref(route.query)
+    const store = useStore();
+
+    let filterQuery = ref(route.query);
 
     const centerMap = computed(() => ({
       lat: DETAILED_ROOM.address.data.latitude,
       lng: DETAILED_ROOM.address.data.longitude,
     }));
+
+    function bookRoom() {
+      store.commit("changeCurrentRoom", DETAILED_ROOM);
+    }
 
     return {
       filterQuery,
@@ -84,7 +97,8 @@ export default {
       IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
       ROOM_AVAILABILITY,
-      ROOM_DETAIL_PRICED
+      ROOM_DETAIL_PRICED,
+      bookRoom
     };
   },
 };
