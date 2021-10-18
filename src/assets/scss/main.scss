@@ -136,6 +136,13 @@ p {
   justify-items: center;
 }
 
+.required {
+  &::before {
+    content:"* ";
+    color: red;
+  }
+}
+
 .container {
   padding: 0 1.25rem;
   margin: auto;
@@ -200,6 +207,10 @@ p {
 
 .w-90 {
   width: 90%;
+}
+
+.w-50 {
+  width: 50%;
 }
 
 .wmd-100-wmd-90 {

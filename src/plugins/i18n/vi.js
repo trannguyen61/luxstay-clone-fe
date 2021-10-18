@@ -127,6 +127,27 @@ export default {
       service_price: "Phí dịch vụ",
       total: "Tổng tiền",
       book_now: "Đặt ngay"
+    },
+    book: {
+      book_info: "Thông tin đặt chỗ",
+      guest_number: "Số khách",
+      night_at: "đêm tại",
+      checkin: "Nhận phòng",
+      checkout: "Trả phòng",
+      responsibility: "Trách nhiệm vật chất",
+      all_responsibility: "Khách hàng chịu mọi trách nhiệm thiệt hại về tài sản đã gây ra tại chỗ ở trong thời gian lưu trú.",
+      rules: "Nội quy chỗ ở",
+      making_noise_rule: "Avoid making noises after 10 pm\n",
+      guest_info: "Thông tin của bạn",
+      guest_name: "Tên Khách hàng",
+      name_on_card: "Họ tên trên CMND/ Thẻ căn cước",
+      guest_phone: "Số điện thoại",
+      phone_code: "Mã điện thoại quốc gia",
+      email: "Email",
+      example: "VD",
+      country: "Quốc gia cư trú",
+      country_notice: "Nội dung này sẽ được sử dụng cho vấn đề pháp lý và thuế.",
+      book_detail: "Chi tiết đặt chỗ"
     }
   },
 };

@@ -1,0 +1,10 @@
+@import "../consts.scss";
+
+.book-page {
+  background-color: $light-bg;
+  padding-top: 30px;
+
+  .el-select .el-input__inner {
+    padding-left: 10px;
+  }
+}

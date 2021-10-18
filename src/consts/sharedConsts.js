@@ -68,11 +68,25 @@ export const DETAIL_GENERAL_FILTER_OPTIONS = [
   }
 ]
 
-const AMENITY_TYPES_ID = {
+export const AMENITY_TYPES_ID = {
   facility: 6,
   kitchen: 2,
   entertainment: 3,
   general: 5
 }
+
+export const COUNTRIES = [
+  {
+    label: "Vietnam",
+    value: "vietnam"
+  }
+]
+
+export const COUNTRY_PHONE_CODE = [
+  {
+    label: "Vietnam",
+    value: "+84"
+  }
+]
 
 export const PAGINATION_SIZE = 1;

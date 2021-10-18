@@ -124,6 +124,27 @@ export default {
       service_price: "Service fee",
       total: "Total",
       book_now: "Book now"
+    },
+    book: {
+      book_info: "Booking information",
+      guest_number: "Guests",
+      night_at: "night(s) in",
+      checkin: "Check-in",
+      checkout: "Check-out",
+      responsibility: "Damage Policy",
+      all_responsibility: "You will be responsible for any damage to the rental property caused by you or your party during your stay.",
+      rules: "House rules",
+      making_noise_rule: "Avoid making noises after 10 pm\n",
+      guest_info: "Your information",
+      guest_name: "Customer name",
+      name_on_card: "Full name as written on your national ID card",
+      guest_phone: "Mobile number",
+      phone_code: "While (+84) is your country dialing cod",
+      email: "Email",
+      example: "e.g",
+      country: "Country of residence",
+      country_notice: "This content will be used for legal policy",
+      book_detail: "Booking detail"
     }
   },
 };

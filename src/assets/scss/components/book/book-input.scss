@@ -1,0 +1,20 @@
+.decor-line {
+  width: 40%;
+  margin-right: auto;
+  margin-left: 0;
+  color: transparent;
+  height: 4px;
+  border-radius: 4px;
+
+  &--green {
+    background-color: green;
+  }
+
+  &--yellow {
+    background-color: orange;
+  }
+}
+
+label {
+  font-weight: bold;
+}
