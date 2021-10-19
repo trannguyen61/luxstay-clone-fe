@@ -116,16 +116,15 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watch } from "vue";
-import { useRoute } from "vue-router";
+import { ref, reactive } from "vue";
 import { useStore } from "vuex";
-import { i18n } from "@/plugins/i18n/i18n";
+
+import useBookRouteQuery from "@/composables/useBookRouteQuery";
 
 import { COUNTRIES, COUNTRY_PHONE_CODE } from "@/consts/sharedConsts";
 
 export default {
   setup() {
-    const route = useRoute();
     const store = useStore();
 
     let guestName = ref("");
@@ -136,18 +135,15 @@ export default {
     let email = ref("");
     let country = ref("");
 
-    let totalGuestsText = computed(
-      () => `${route.query.totalGuests} ${i18n.global.t("shared.guest_name")}`
-    );
-    let checkin = computed(() => route.query.checkin);
-    let checkout = computed(() => route.query.checkout);
-
-    let dateDiff = computed(() =>
-      parseInt(
-        (new Date(checkout.value) - new Date(checkin.value)) /
-          (24 * 3600 * 1000 * 7)
-      )
-    );
+    let {
+      totalGuestsText,
+      checkin,
+      checkout,
+      dateDiff,
+      grownupGuests,
+      kidGuests,
+      babyGuests,
+    } = useBookRouteQuery();
 
     let currentRoomName = store.state.currentRoom.name;
 
@@ -156,11 +152,14 @@ export default {
       phoneNumber,
       email,
       country,
-      totalGuestsText,
       currentRoomName,
+      totalGuestsText,
       checkin,
       checkout,
       dateDiff,
+      grownupGuests,
+      kidGuests,
+      babyGuests,
       COUNTRIES,
       COUNTRY_PHONE_CODE,
     };

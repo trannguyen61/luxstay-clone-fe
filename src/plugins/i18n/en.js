@@ -20,6 +20,9 @@ export default {
     read_more: "Read more",
     collapse: "Collapse",
     after: "After",
+    grownup: "grownup(s)",
+    kid: "kid(s)",
+    baby: "baby/babies",
     type: {
       apartment: "Apartment",
     },

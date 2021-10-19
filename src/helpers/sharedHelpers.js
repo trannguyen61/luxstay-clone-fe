@@ -39,3 +39,8 @@ export function convertCurrency(price, locale) {
     });
   }
 }
+
+export function convertDate(date, format = "YYYY-mm-dd") {
+  const splittedDate = date.split("-")
+  return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+}

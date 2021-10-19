@@ -5,5 +5,11 @@
 .book-page {
   .book-room-card {
     margin-top: 40px;
+
+    .featured-photo {
+      height: 100px;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 }

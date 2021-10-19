@@ -20,6 +20,9 @@ export default {
     read_more: "Đọc thêm",
     collapse: "Thu gọn",
     after: "Sau",
+    grownup: "người lớn",
+    kid: "trẻ em",
+    baby: "trẻ sơ sinh",
     type: {
       apartment: "Chung cư",
     },
