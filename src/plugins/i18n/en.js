@@ -148,6 +148,18 @@ export default {
       country: "Country of residence",
       country_notice: "This content will be used for legal policy",
       book_detail: "Booking detail"
+    },
+    authen: {
+      welcome: "Sign up for more promotions and benefits",
+      detail_welcome: "Swift, convenient, and safe. Sign up now for more interests.",
+      detail_01: "Lux Credit",
+      detail_desc_01: "Earn Lux Coins for each successful booking and use them for your next trips.",
+      detail_02: "Smart functions",
+      detail_desc_02: "Check-in and check your receipts offline. Refund faster and change calendar easier.",
+      detail_03: "Simple payment",
+      detail_desc_03: "Save card information in My Cards, much safer and convenient for the next payment.",
+      detail_04: "New promotions every day",
+      detail_desc_04: "Update promotions from Luxstay and choose great accommodation at your budget."
     }
   },
 };

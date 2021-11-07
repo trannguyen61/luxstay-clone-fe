@@ -151,6 +151,18 @@ export default {
       country: "Quốc gia cư trú",
       country_notice: "Nội dung này sẽ được sử dụng cho vấn đề pháp lý và thuế.",
       book_detail: "Chi tiết đặt chỗ"
+    },
+    authen: {
+      welcome: "Đăng ký thành viên Luxstay - Tích điểm thưởng và nhận ưu đãi",
+      detail_welcome: "Nhanh chóng, tiện lợi và an toàn. Đăng ký liền tay, rinh ngay quyền lợi.",
+      detail_01: "Tích điểm nhanh chóng",
+      detail_desc_01: "Tích điểm đối với mỗi lượt đặt chỗ thành công. Quy đổi thành Lux Credit để du lịch nhiều hơn nữa.",
+      detail_02: "Tiện ích thông minh",
+      detail_desc_02: "Check-in và kiểm tra hóa đơn thanh toán kể cả khi không có kết nối mạng. Hoàn tiền nhanh gọn. Đổi lịch dễ dàng.",
+      detail_03: "Thanh toán đơn giản",
+      detail_desc_03: "Phương thức thanh toán tiện lợi, an toàn. Tích hợp chức năng lưu thẻ để đặt phòng lần sau.",
+      detail_04: "Ưu đãi mỗi ngày",
+      detail_desc_04: "Nhận thông báo ưu đãi từ Luxstay khi có kế hoạch du lịch để lựa chọn và đặt ngay cho mình một chỗ ở phù hợp, tiện nghi với giá tốt nhất."
     }
   },
 };

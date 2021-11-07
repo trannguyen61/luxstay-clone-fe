@@ -172,7 +172,13 @@ p {
 
 .col-lg-20,
 .col-md-3,
-.col-xs-6 {
+.col-md-4,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-xs-6,
+.col-xs-12,
+.col-sm-6 {
   flex: 0 0 auto;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -183,10 +189,51 @@ p {
   flex-basis: 50%;
   max-width: 50%;
 }
+
+.col-xs-12 {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.col-sm-6 {
+  @media screen and (min-width: $sm) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+
 .col-md-3 {
   @media screen and (min-width: $md) {
     flex-basis: 25%;
     max-width: 25%;
+  }
+}
+
+.col-md-4 {
+  @media screen and (min-width: $md) {
+    flex-basis: 33.33333%;
+    max-width: 33.33333%;  
+  }
+}
+
+.col-md-6 {
+  @media screen and (min-width: $md) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+
+.col-md-7 {
+  @media screen and (min-width: $md) {
+    flex-basis: 58.33333%;
+    max-width: 58.33333%;
+  }
+}
+
+.col-md-8 {
+  @media screen and (min-width: $md) {
+    flex-basis: 66.66667%;
+    max-width: 66.66667%;
   }
 }
 

@@ -1,0 +1,31 @@
+@import "./consts.scss";
+
+.welcome-banner {
+    background: linear-gradient(90deg,#f65e38 0,#f68a39 51%,#f65e38);
+    padding: 3rem 0 5rem;
+    color: #fff;
+
+    @media screen and (min-width: $sm) {
+        padding: 3rem 0;
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        margin-bottom: .625rem;
+
+        @media screen and (min-width: $sm) {
+            font-size: 1.5rem;
+            line-height: 2.25rem;
+            margin-bottom: .625rem;
+        }    
+    }
+
+    &__desc {
+        font-size: .95rem;
+        margin: 0;
+
+        @media screen and (min-width: $sm) {
+            font-size: 1.125rem;
+        }
+    }
+}
