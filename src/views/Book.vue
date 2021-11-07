@@ -2,7 +2,7 @@
   <div class="book-page">
     <el-row :gutter="20" class="container container--sm mx-auto">
       <el-col :span="24" :md="12">
-        <book-room-input></book-room-input>
+        <book-room-input :bookRoom="bookRoom"></book-room-input>
       </el-col>
       <el-col :md="2" :lg="4"></el-col>
       <el-col :span="24" :md="10" :lg="8">
@@ -35,6 +35,13 @@ export default {
         });
       }
     });
+
+    function bookRoom() {
+    }
+
+    return {
+      bookRoom
+    }
   },
 };
 </script>

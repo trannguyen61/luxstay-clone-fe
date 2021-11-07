@@ -109,7 +109,7 @@
       </el-select>
     </div>
 
-    <el-button class="el-button--active mt-3">
+    <el-button class="el-button--active mt-3" @click="bookRoom">
       {{ $t("pages.room.book_now") }}
     </el-button>
   </div>
@@ -124,7 +124,14 @@ import useBookRouteQuery from "@/composables/useBookRouteQuery";
 import { COUNTRIES, COUNTRY_PHONE_CODE } from "@/consts/sharedConsts";
 
 export default {
-  setup() {
+  props: {
+    bookRoom: {
+      type: Function,
+      default: () => (() => {}),
+    }
+  },
+
+  setup(props) {
     const store = useStore();
 
     let guestName = ref("");

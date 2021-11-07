@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import payment from './modules/payment'
 
 import { CURRENCIES_OBJ } from '../consts/billingConsts'
 
@@ -16,5 +17,7 @@ export default createStore({
     }
   },
   actions: {},
-  modules: {},
+  modules: {
+    payment
+  },
 });
