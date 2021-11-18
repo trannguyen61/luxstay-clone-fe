@@ -143,6 +143,23 @@ p {
   }
 }
 
+.block-btn {
+  display: block;
+  width: 100%;
+}
+
+.first-xs {
+  @media screen and (max-width: $sm) {
+    order: 1;
+  }
+}
+
+.second-xs {
+  @media screen and (max-width: $sm) {
+    order: 2;
+  }
+}
+
 .container {
   padding: 0 1.25rem;
   margin: auto;
@@ -359,6 +376,10 @@ p {
 
 .mt-3 {
   margin-top: 1.5em;
+}
+
+.mt-6 {
+  margin-top: 3em;
 }
 
 .mb-1 {

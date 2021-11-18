@@ -2,7 +2,7 @@
     <div class="detail-banner">
         <div class="container container--sm">
             <div class="row">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 col-md-8 second-xs">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="detail">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-4 first-xs">
                     <slot></slot>
                 </div>
             </div>

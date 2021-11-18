@@ -159,7 +159,19 @@ export default {
       detail_03: "Simple payment",
       detail_desc_03: "Save card information in My Cards, much safer and convenient for the next payment.",
       detail_04: "New promotions every day",
-      detail_desc_04: "Update promotions from Luxstay and choose great accommodation at your budget."
+      detail_desc_04: "Update promotions from Luxstay and choose great accommodation at your budget.",
+      signup: "Sign up as member",
+      email: "Email address",
+      phone: "Phone number",
+      first_name: "First name",
+      last_name: "Last and middle name",
+      password: "Password",
+      signup_btn: "Signup",
+      login_btn: "Login",
+      password_rule: "At least 6 characters",
+      had_account: "Already had Luxstay account?",
+      login: "Login",
+      not_have_acc: "Havent had Luxstay account yet?"
     }
   },
 };

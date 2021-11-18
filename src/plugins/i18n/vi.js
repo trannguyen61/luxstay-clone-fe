@@ -162,7 +162,19 @@ export default {
       detail_03: "Thanh toán đơn giản",
       detail_desc_03: "Phương thức thanh toán tiện lợi, an toàn. Tích hợp chức năng lưu thẻ để đặt phòng lần sau.",
       detail_04: "Ưu đãi mỗi ngày",
-      detail_desc_04: "Nhận thông báo ưu đãi từ Luxstay khi có kế hoạch du lịch để lựa chọn và đặt ngay cho mình một chỗ ở phù hợp, tiện nghi với giá tốt nhất."
+      detail_desc_04: "Nhận thông báo ưu đãi từ Luxstay khi có kế hoạch du lịch để lựa chọn và đặt ngay cho mình một chỗ ở phù hợp, tiện nghi với giá tốt nhất.",
+      signup: "Đăng ký thành viên",
+      email: "Địa chỉ email",
+      phone: "Số điện thoại",
+      first_name: "Tên",
+      last_name: "Họ và tên đệm",
+      password: "Mật khẩu",
+      signup_btn: "Đăng ký",
+      login_btn: "Đăng nhập",
+      password_rule: "Tối thiểu 6 ký tự",
+      had_account: "Bạn đã có tài khoản Luxstay?",
+      login: "Đăng nhập",
+      not_have_acc: "Bạn chưa có tài khoản Luxstay?"
     }
   },
 };
