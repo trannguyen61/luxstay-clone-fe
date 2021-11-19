@@ -67,8 +67,9 @@ export default {
       shopping: "Mua sắm và ăn uống",
       cafe: "Quán cà phê",
       bar: "Bar"
-    }
-
+    },
+    signout: "Đăng xuất",
+    my_book: "Đặt chỗ của tôi"
   },
   places: {
     hanoi: "Hà Nội",

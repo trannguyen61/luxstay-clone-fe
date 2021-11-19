@@ -15,16 +15,18 @@
         $t("shared.signup")
       }}</router-link>
 
+      <logged-member-picker class="mb-2" />
       <setting-picker />
     </div>
   </transition>
 </template>
 
 <script>
+import LoggedMemberPicker from '@/components/shared/LoggedMemberPicker'
 import SettingPicker from "./SettingPicker.vue";
 
 export default {
-  components: { SettingPicker },
+  components: { SettingPicker, LoggedMemberPicker },
   props: {
     isOpened: {
       type: Boolean,

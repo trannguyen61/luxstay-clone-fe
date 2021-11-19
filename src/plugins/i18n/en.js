@@ -66,7 +66,9 @@ export default {
       shopping: "Shopping",
       cafe: "Cafeteria",
       bar: "Bar"
-    }
+    },
+    signout: "Sign out",
+    my_book: "My book"
   },
   places: {
     hanoi: "Hanoi",

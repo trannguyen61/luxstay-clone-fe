@@ -173,3 +173,66 @@
   font-size: 1.5em;
   margin-left: auto;
 }
+
+.logged-member-picker {
+  .setting-picker-btn {
+    padding: 0 5px;
+    min-height: 2em;
+  }
+
+  .setting-picker-dialog {
+    right: initial;
+    padding: 0;
+    min-width: 220px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  li {
+    position: relative;
+    border-bottom: 0.5px solid $light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      p {
+        color: $highlight;
+      }
+
+      &::before {
+        height: 100%;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 0;
+      background: linear-gradient(270deg, #f68a39, #f65e39);
+      border-radius: 1px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      transition: all 0.2s;
+    }
+  }
+
+  &--item {
+    text-decoration: none;
+    padding: 15px 25px;
+    color: $text;
+    margin-bottom: 0 !important;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

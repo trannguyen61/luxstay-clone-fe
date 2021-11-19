@@ -42,6 +42,7 @@
         $t("shared.signup")
       }}</router-link>
 
+      <logged-member-picker />
       <setting-picker />
     </div>
 
@@ -59,6 +60,7 @@ import { useRouter } from "vue-router";
 
 import GuestPicker from "./GuestPicker.vue";
 import SettingPicker from "./SettingPicker.vue";
+import LoggedMemberPicker from "@/components/shared/LoggedMemberPicker";
 
 import { isMdOrAboveScreen, isXsScreen } from "@/helpers/mediaHelpers";
 
@@ -66,6 +68,7 @@ export default {
   components: {
     GuestPicker,
     SettingPicker,
+    LoggedMemberPicker,
   },
 
   emits: ["toggle-sidebar"],
