@@ -174,4 +174,8 @@ export default {
       not_have_acc: "Havent had Luxstay account yet?"
     }
   },
+  errors: {
+    not_valid_email: "Not valid email format.",
+    not_valid_password: "Password must be longer than 6 characters."
+  }
 };

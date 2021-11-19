@@ -1,11 +1,11 @@
 .authen-form {
-    padding: 2rem;
-    background-color: white;
-    margin-top: -6rem;
+  padding: 2rem;
+  background-color: white;
+  margin-top: -6rem;
 
-    @media screen and (max-width: $sm) {
-        margin-top: 3rem;
-      }
+  @media screen and (max-width: $sm) {
+    margin-top: 3rem;
+  }
 
   &--input {
     margin-top: 1em;

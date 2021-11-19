@@ -1,55 +1,93 @@
 <template>
   <div class="authen-form card">
-      <h2 class="mb-3">{{ $t("pages.authen.login") }}</h2>
-      <form>
-          <div class="authen-form--input">
-              <label for="email" class="required">{{ $t("pages.authen.email") }}</label>
-              <el-input name="email" v-model="email" placeholder="">
-                    <template #suffix>
-                        <font-awesome-icon icon="envelope" class="mr-1" />
-                    </template>
-                </el-input>
-          </div>
-
-          <div class="authen-form--input">
-              <label for="password" class="required">{{ $t("pages.authen.password") }}</label>
-              <el-input name="password" v-model="password" placeholder="" show-password></el-input>
-          </div>
-
-          <el-button round :disabled="notValidForm" class="el-button--active block-btn mt-6" @click="login">
-            {{ $t("pages.authen.login_btn") }}
-            </el-button>
-      </form>
-
-      <div class="mt-3 d-flex justify-content-center">
-          {{ $t("pages.authen.not_have_acc") }}
-        <router-link to="#" class="link link--highlight ml-1" >{{ $t("pages.authen.signup_btn") }}</router-link>
+    <h2 class="mb-3">{{ $t("pages.authen.login") }}</h2>
+    <form>
+      <div class="authen-form--input">
+        <label for="email" class="required">{{
+          $t("pages.authen.email")
+        }}</label>
+        <el-input
+          name="email"
+          v-model="email"
+          placeholder=""
+          @input="changeEmail"
+        >
+          <template #suffix>
+            <font-awesome-icon icon="envelope" class="mr-1" />
+          </template>
+        </el-input>
+        <small class="text-danger">{{
+          notValidEmail ? $t("errors.not_valid_email") : ""
+        }}</small>
       </div>
+
+      <div class="authen-form--input">
+        <label for="password" class="required">{{
+          $t("pages.authen.password")
+        }}</label>
+        <el-input
+          name="password"
+          v-model="password"
+          placeholder=""
+          show-password
+          @input="changePassword"
+        ></el-input>
+        <small class="text-danger">{{
+          notValidPassword ? $t("errors.not_valid_password") : ""
+        }}</small>
+      </div>
+
+      <el-button
+        round
+        :disabled="notValidForm"
+        class="el-button--active block-btn mt-6"
+        @click="login"
+      >
+        {{ $t("pages.authen.login_btn") }}
+      </el-button>
+    </form>
+
+    <div class="mt-3 d-flex justify-content-center">
+      {{ $t("pages.authen.not_have_acc") }}
+      <router-link to="#" class="link link--highlight ml-1">{{
+        $t("pages.authen.signup_btn")
+      }}</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { computed } from "vue";
+import useAuthenForm from "@/composables/useAuthenForm";
 
 export default {
   setup() {
     // const store = useStore();
+    let {
+      email,
+      password,
+      notValidEmail,
+      notValidPassword,
+      changeEmail,
+      changePassword,
+    } = useAuthenForm();
 
-    let email = ref("");
-    let password = ref("");
-
-    const login = () => {}
+    const login = () => {};
 
     const notValidForm = computed(() => {
-        return !email.value || !password.value
-    })
+      return !email.value || !password.value;
+    });
 
     return {
       email,
       password,
       login,
       notValidForm,
+      notValidEmail,
+      notValidPassword,
+      changeEmail,
+      changePassword,
     };
-  }
-}
+  },
+};
 </script>

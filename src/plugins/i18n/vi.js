@@ -177,4 +177,8 @@ export default {
       not_have_acc: "Bạn chưa có tài khoản Luxstay?"
     }
   },
+  errors: {
+    not_valid_email: "Không đúng định dạng email.",
+    not_valid_password: "Mật khẩu cần dài hơn 6 ký tự."
+  }
 };
