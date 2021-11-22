@@ -1,0 +1,32 @@
+@import "../../consts.scss";
+
+.my-booked-list {
+  .input-container {
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: $border-radius;
+    box-shadow: 1px 1px 1px 0 $light-bg;
+    display: flex;
+    flex-direction: column;
+
+    small {
+      color: $small-text;
+    }
+  }
+
+  &--list {
+  }
+
+  .el-input__inner {
+    border: none;
+    font-weight: bold;
+  }
+
+  .el-select .el-input__inner {
+    padding: 0 !important;
+  }
+
+  .el-range-separator {
+    visibility: hidden;
+  }
+}

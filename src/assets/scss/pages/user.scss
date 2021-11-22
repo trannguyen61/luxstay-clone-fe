@@ -1,0 +1,13 @@
+@import "../consts.scss";
+
+.user-page {
+  &--content {
+    background-color: $lighter;
+
+    .container {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      min-height: 65vh;
+    }
+  }
+}

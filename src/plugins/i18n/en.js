@@ -68,7 +68,9 @@ export default {
       bar: "Bar"
     },
     signout: "Sign out",
-    my_book: "My book"
+    my_book: "My book",
+    no_data: "No data found",
+    pending: "Pending"
   },
   places: {
     hanoi: "Hanoi",
@@ -174,6 +176,17 @@ export default {
       had_account: "Already had Luxstay account?",
       login: "Login",
       not_have_acc: "Havent had Luxstay account yet?"
+    },
+    user: {
+      my_booked_list: "My booked list",
+      homestay: "Homestay",
+      all_book_type: "All status",
+      pending_book_type: "Pending",
+      booked_type: "Booked",
+      book_type_title: "Booked type",
+      from_month: "From month",
+      to_month: "To month",
+      pay: "Pay"
     }
   },
   errors: {

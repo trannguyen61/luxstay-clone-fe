@@ -69,7 +69,9 @@ export default {
       bar: "Bar"
     },
     signout: "Đăng xuất",
-    my_book: "Đặt chỗ của tôi"
+    my_book: "Đặt chỗ của tôi",
+    no_data: "Không tìm thấy kết quả phù hợp",
+    pending: "Chờ thanh toán"
   },
   places: {
     hanoi: "Hà Nội",
@@ -176,6 +178,17 @@ export default {
       had_account: "Bạn đã có tài khoản Luxstay?",
       login: "Đăng nhập",
       not_have_acc: "Bạn chưa có tài khoản Luxstay?"
+    },
+    user: {
+      my_booked_list: "Đặt chỗ của tôi",
+      homestay: "Homestay",
+      all_book_type: "Tất cả đặt chỗ",
+      pending_book_type: "Chờ thanh toán",
+      booked_type: "Đặt thành công",
+      book_type_title: "Loại đặt phòng",
+      from_month: "Từ tháng",
+      to_month: "Đến tháng",
+      pay: "Thanh toán"
     }
   },
   errors: {
