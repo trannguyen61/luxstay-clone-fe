@@ -130,7 +130,8 @@ export default {
       price_a_night: "Price",
       service_price: "Service fee",
       total: "Total",
-      book_now: "Book now"
+      book_now: "Book now",
+      review: "Review"
     },
     book: {
       book_info: "Booking information",

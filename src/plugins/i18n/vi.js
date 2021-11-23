@@ -132,7 +132,8 @@ export default {
       price_a_night: "Giá thuê",
       service_price: "Phí dịch vụ",
       total: "Tổng tiền",
-      book_now: "Đặt ngay"
+      book_now: "Đặt ngay",
+      review: "Đánh giá"
     },
     book: {
       book_info: "Thông tin đặt chỗ",

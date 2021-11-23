@@ -41,6 +41,9 @@ export function convertCurrency(price, locale) {
 }
 
 export function convertDate(date, format = "YYYY-mm-dd") {
+  if (format == 'T') {
+    date = date.split('T')[0]
+  } 
   const splittedDate = date.split("-")
-  return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+  return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`  
 }

@@ -23,6 +23,8 @@
         <div class="spacer"></div>
         <room-availability :avai="ROOM_AVAILABILITY['1']"></room-availability>
         <div class="spacer"></div>
+        <room-review :reviews="ROOM_REVIEW"></room-review>
+        <div class="spacer"></div>
         <room-repay-rules :time="DETAILED_ROOM.price.data"></room-repay-rules>
         <div class="spacer"></div>
         <room-map :center="centerMap"></room-map>
@@ -51,6 +53,7 @@ import RoomDescription from "@/components/room/RoomDescription.vue";
 import RoomAmenity from "@/components/room/RoomAmenity.vue";
 import RoomPrice from "@/components/room/RoomPrice.vue";
 import RoomAvailability from "@/components/room/RoomAvailability.vue";
+import RoomReview from "@/components/room/RoomReview.vue";
 import RoomRepayRules from "@/components/room/RoomRepayRules.vue";
 import RoomMap from "@/components/room/RoomMap.vue";
 import BookRoom from "@/components/room/BookRoom.vue";
@@ -60,6 +63,7 @@ import {
   DETAILED_ROOM,
   ROOM_AVAILABILITY,
   ROOM_DETAIL_PRICED,
+  ROOM_REVIEW
 } from "@/test/testData.js";
 
 export default {
@@ -70,6 +74,7 @@ export default {
     RoomAmenity,
     RoomPrice,
     RoomAvailability,
+    RoomReview,
     RoomRepayRules,
     RoomMap,
     BookRoom,
@@ -98,6 +103,7 @@ export default {
       DETAILED_ROOM,
       ROOM_AVAILABILITY,
       ROOM_DETAIL_PRICED,
+      ROOM_REVIEW,
       bookRoom
     };
   },
