@@ -77,7 +77,10 @@ export default {
     signout: "Sign out",
     my_book: "My book",
     no_data: "No data found",
-    pending: "Pending"
+    pending: "Pending",
+    allowed: "Allowed",
+    unallowed: "Unallowed",
+    charge: "Charge"
   },
   places: {
     hanoi: "Hanoi",
@@ -131,14 +134,23 @@ export default {
         repay_100_no_service: "Full refund, minus the service fee",
         "5_day_to_checkin": "5 days before check-in",
         repay_50: "50% Refund, minus the first night and the service fee and other free",
-        checkin: "Check-in"
+        checkin: "Check-in",
+        special_rules: "Special rules",
+        smoking: "Smoking",
+        pet: "Pet",
+        cooking: "Cooking",
+        party: "Party"
       },
       map: "Map",
       price_a_night: "Price",
       service_price: "Service fee",
       total: "Total",
       book_now: "Book now",
-      review: "Review"
+      review: "Review",
+      cleaning_price: "Cleaning price",
+      normal_day_price: "Normal day price",
+      num_of_workday: "Number of workdays",
+      num_or_weekend: "Number of weekend days"
     },
     book: {
       book_info: "Booking information",

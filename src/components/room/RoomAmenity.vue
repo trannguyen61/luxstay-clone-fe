@@ -2,7 +2,7 @@
   <h3>{{ $t("pages.room.amenity") }}</h3>
   <p>{{ $t("pages.room.amenity_description") }}</p>
 
-  <template v-for="input in amenityTypes" :key="input.id">
+  <!-- <template v-for="input in amenityTypes" :key="input.id">
     <h4>{{ input.name }}</h4>
     <el-row>
       <el-col v-for="fac in input.amenities.data" :key="fac.id" :span="12" :md="8" class="mb-1">
@@ -10,7 +10,14 @@
         <span>{{ fac.name }}</span>
       </el-col>
     </el-row>
-  </template>
+  </template> -->
+
+  <el-row>
+    <el-col v-for="fac in amenity" :key="fac.id" :span="12" :md="8" class="mb-1">
+      <font-awesome-icon icon="angle-right" class="mr-1" />
+      <span>{{ fac }}</span>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

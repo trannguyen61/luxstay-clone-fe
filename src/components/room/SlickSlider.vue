@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch, nextTick } from "vue";
 
 export default {
   props: {
@@ -71,7 +71,8 @@ export default {
         imgArrayWidths.value = imgs.map((e) => {
           return e.width;
         });
-        lastImgWidth.value = imgArrayWidths.value[-1];
+        lastImgWidth.value = imgArrayWidths.value[imgArrayWidths.value.length - 1];
+        getLengthLeftToLastImg()
       });
     }
 
@@ -98,7 +99,17 @@ export default {
       }
     }
 
+    watch(() => props.imgArray, () => {
+      init()
+    })
+
     onMounted(() => {
+      init()
+    });
+
+    async function init() {
+      if (!props.imgArray.length) return
+
       const sliderWidth = convertWidthProp()
 
       const slick = document.getElementById(`${props.slickId}`);
@@ -111,23 +122,26 @@ export default {
       const sliderItems = document.getElementsByClassName(
         "slick-slider--items"
       )[0];
+      await nextTick()
       const images = sliderItems.children;
       getImgWidth([...images]);
-    });
+    }
 
-    function lengthLeftToLastImg() {
+    let lengthLeftToLastImg = ref(0)
+
+    function getLengthLeftToLastImg () {
       const leftImg = imgArrayWidths.value.filter(
         (e, i) => i >= currentImg.value
       );
       const length = leftImg.reduce((sum, w) => sum + w, 0);
-      return length + (leftImg.length - 1) * IMAGE_MARGIN * 2;
+      lengthLeftToLastImg.value = length + (leftImg.length - 1) * IMAGE_MARGIN * 2;
     }
 
     let currentImg = ref(0);
 
     let isReachedHead = computed(() => currentImg.value == 0);
     let isReachedTail = computed(() => {
-      if (lengthLeftToLastImg() < totalOnScreenItemsLength.value) return true;
+      if (lengthLeftToLastImg.value < totalOnScreenItemsLength.value) return true;
       return false;
     });
 
@@ -139,6 +153,7 @@ export default {
         imgArrayWidths.value[currentImg.value - 1] + 2 * IMAGE_MARGIN;
       slickItems.style.transform = `translateX(${xPosition.value}px)`;
       currentImg.value -= 1;
+      getLengthLeftToLastImg()
     }
 
     function next() {
@@ -149,6 +164,7 @@ export default {
         imgArrayWidths.value[currentImg.value] + 2 * IMAGE_MARGIN;
       slickItems.style.transform = `translateX(${xPosition.value}px)`;
       currentImg.value += 1;
+      getLengthLeftToLastImg()
     }
 
     return {

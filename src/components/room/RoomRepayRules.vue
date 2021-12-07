@@ -67,12 +67,24 @@ export default {
 
       const tableData = computed(() => [
           {
-              date: 'Check-in',
-              time: props.time.checkin_time
+              date: i18n.global.t('pages.room.rules.special_rules'),
+              time: props.time.special_rules
           },
           {
-              date: 'Check-out',
-              time: props.time.checkout_time
+              date: i18n.global.t('pages.room.rules.smoking'),
+              time: i18n.global.t(`shared.${props.time.smoking}`)
+          },
+          {
+              date: i18n.global.t('pages.room.rules.pet'),
+              time: i18n.global.t(`shared.${props.time.pet}`)
+          },
+          {
+              date: i18n.global.t('pages.room.rules.cooking'),
+              time: i18n.global.t(`shared.${props.time.cooking}`)
+          },
+          {
+              date: i18n.global.t('pages.room.rules.party'),
+              time: i18n.global.t(`shared.${props.time.party}`)
           }
       ])
 

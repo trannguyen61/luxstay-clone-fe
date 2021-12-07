@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axios'
 
-import { GET_PLACE_BY_CITY, PAGE, COUNT } from '../baseApi'
+import { GET_PLACE_BY_CITY, PAGE, COUNT, PLACE } from '../baseApi'
 
 export default {
     getPlaceByCity({ place, page }) {
@@ -8,5 +8,8 @@ export default {
     },
     getTotalNumberOfPlaceInCity({ place }) {
         return axiosInstance.get(`${GET_PLACE_BY_CITY}/${place}${COUNT}`)
+    },
+    getPlaceById({ id }) {
+        return axiosInstance.get(`${PLACE}/${id}`)
     }
 }

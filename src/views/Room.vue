@@ -2,39 +2,38 @@
   <div class="room-page">
     <slick-slider
       :height="400"
-      :imgArray="IMAGES_SLICK_ARRAY"
+      :imgArray="imageArray"
       slickId="room-slick"
       id="room-slick"
     ></slick-slider>
     <el-row :gutter="20" class="container container--sm mx-auto">
-      <el-col :span="24" :md="16">
+      <el-col :span="24" :md="16" v-if="detailedRoom.id">
         <place-breadcrumb
           class="mt-3 mb-3"
-          :items="DETAILED_ROOM.destinations.data"
+          :items="[{name: detailedRoom.address}]"
         ></place-breadcrumb>
-        <room-description :room="DETAILED_ROOM"></room-description>
+        <room-description :room="detailedRoom"></room-description>
         <div class="spacer"></div>
         <room-amenity
-          :amenity="DETAILED_ROOM.amenities.data"
-          :amenityTypes="DETAILED_ROOM.amenityTypes.data"
+          :amenity="detailedRoom.place_facilities_attributes"
         ></room-amenity>
         <div class="spacer"></div>
-        <room-price :price="DETAILED_ROOM.price.data"></room-price>
+        <room-price
+          :price="detailedRoom.schedule_price_attributes"
+          :currency="detailedRoom.policy_attributes.currency"></room-price>
         <div class="spacer"></div>
-        <room-availability :avai="ROOM_AVAILABILITY['1']"></room-availability>
+        <room-review :reviews="detailedRoom.ratings"></room-review>
         <div class="spacer"></div>
-        <room-review :reviews="ROOM_REVIEW"></room-review>
-        <div class="spacer"></div>
-        <room-repay-rules :time="DETAILED_ROOM.price.data"></room-repay-rules>
+        <room-repay-rules :time="detailedRoom.rule_attributes"></room-repay-rules>
         <div class="spacer"></div>
         <room-map :center="centerMap"></room-map>
       </el-col>
-      <el-col :span="24" :md="8">
+      <el-col :span="24" :md="8" v-if="detailedRoom.id">
         <book-room
           :defaultInput="filterQuery"
-          :defaultPrice="DETAILED_ROOM.price.data"
-          :detail="ROOM_DETAIL_PRICED.origin"
-          :roomId="DETAILED_ROOM.id"
+          :defaultPrice="detailedRoom.schedule_price_attributes"
+          :roomId="detailedRoom.id"
+          :currency="detailedRoom.policy_attributes.currency"
           @book-room="bookRoom"
         ></book-room>
       </el-col>
@@ -43,7 +42,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
@@ -52,7 +51,7 @@ import PlaceBreadcrumb from "@/components/room/PlaceBreadcrumb.vue";
 import RoomDescription from "@/components/room/RoomDescription.vue";
 import RoomAmenity from "@/components/room/RoomAmenity.vue";
 import RoomPrice from "@/components/room/RoomPrice.vue";
-import RoomAvailability from "@/components/room/RoomAvailability.vue";
+// import RoomAvailability from "@/components/room/RoomAvailability.vue";
 import RoomReview from "@/components/room/RoomReview.vue";
 import RoomRepayRules from "@/components/room/RoomRepayRules.vue";
 import RoomMap from "@/components/room/RoomMap.vue";
@@ -66,6 +65,10 @@ import {
   ROOM_REVIEW
 } from "@/test/testData.js";
 
+import placeApi from '@/api/services/placeApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
+
 export default {
   components: {
     SlickSlider,
@@ -73,7 +76,6 @@ export default {
     RoomDescription,
     RoomAmenity,
     RoomPrice,
-    RoomAvailability,
     RoomReview,
     RoomRepayRules,
     RoomMap,
@@ -92,13 +94,44 @@ export default {
       lng: DETAILED_ROOM.address.data.longitude,
     }));
 
+    let detailedRoom = ref({})
+    const roomId = filterQuery.value.id
+
+    let imageArray = ref([])
+    function transformImageArray() {
+      imageArray.value = detailedRoom.value.overviews_attributes.map(e => e.image)
+    }
+
+    async function onGetPlaceById() {
+      const handler = new ApiHandler()
+                          .setData({id: roomId})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            detailedRoom.value = data.data
+                            transformImageArray()
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.getPlaceById(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     function bookRoom() {
       store.commit("changeCurrentRoom", DETAILED_ROOM);
     }
 
+    onMounted(() => {
+      onGetPlaceById()
+    })
+
     return {
       filterQuery,
       centerMap,
+      detailedRoom,
+      imageArray,
       IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
       ROOM_AVAILABILITY,

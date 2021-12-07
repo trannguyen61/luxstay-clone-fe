@@ -8,18 +8,18 @@
       </div>
       <div class="ml-2">
         <div class="d-flex align-items-center">
-          <h5 class="m-0">{{ review.reviewer.name }}</h5>
+          <h5 class="m-0">{{ review.user_name }}</h5>
 
           <div class="rating ml-2">
             <font-awesome-icon icon="star" color="#ffcd3c" />
-            {{ review.star_number }}
+            {{ review.score }}
           </div>
         </div>
-        <small>{{ convertDate(review.created_at, 'T') }}</small>
+        <!-- <small>{{ convertDate(review.created_at, 'T') }}</small> -->
       </div>
     </div>
     <div>
-      <p class="m-0">{{ review.content }}</p>
+      <p class="m-0">{{ review.comment }}</p>
     </div>
   </div>
 </template>

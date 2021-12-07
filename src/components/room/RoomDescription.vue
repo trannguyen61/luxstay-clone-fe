@@ -9,7 +9,7 @@
   </div>
   <div class="d-flex align-items-center mb-1">
     <font-awesome-icon icon="map-marker-alt" class="mr-1" />
-    <strong>{{ address }}</strong>
+    <strong>{{ room.address }}</strong>
     <router-link to="/" class="link link--highlight ml-1">{{
       $t("pages.room.go_to_map")
     }}</router-link>
@@ -17,17 +17,17 @@
   <div class="d-flex align-items-center mb-1">
     <font-awesome-icon icon="building" class="mr-1" />
     <strong>{{ $t("pages.room.other") }}</strong>
-    <p class="m-0 ml-1">{{ room.area }} m<sup>2</sup></p>
+    <p class="m-0 ml-1">{{ room.room_attributes.square }} m<sup>2</sup></p>
   </div>
   <p class="room-page--general-description">
-    {{ room.roomType.data.name }} - {{ room.num_bedrooms }}
-    {{ $t("shared.bedrooms") }} - {{ room.num_beds }} {{ $t("shared.beds") }} -
-    {{ room.num_bathrooms }} {{ $t("shared.bathrooms") }} -
-    {{ $t("shared.maximum") }} {{ room.maximum_guests }}
+    {{ $t("shared.type." + room.place_type) }} - {{ room.room_attributes.num_of_bedroom }}
+    {{ $t("shared.bedrooms") }} - {{ room.room_attributes.num_of_bed }} {{ $t("shared.beds") }} -
+    {{ room.room_attributes.num_of_bathroom }} {{ $t("shared.bathrooms") }} -
+    {{ $t("shared.maximum") }} {{ room.policy_attributes.max_num_of_people }}
     {{ $t("shared.guest_name") }}
   </p>
   <div class="hideable-text" id="hideable-text">
-    <div class="hideable-text--text" v-html="room.introduction"></div>
+    <div class="hideable-text--text" v-html="room.details"></div>
     <div class="hideable-text--toggle">
       <button class="text-btn text-btn--highlight" @click="showText">
         {{ isTextShown ? $t("shared.collapse") : $t("shared.read_more") }}
@@ -48,10 +48,10 @@ export default {
   },
 
   setup(props) {
-    const address = computed(() => {
-      const addObj = props.room.address.data;
-      return `${addObj.city}, ${addObj.state}, ${addObj.country}`;
-    });
+    // const address = computed(() => {
+    //   const addObj = props.room.address.data;
+    //   return `${addObj.city}, ${addObj.state}, ${addObj.country}`;
+    // });
 
     const isTextShown = ref(false);
 
@@ -66,7 +66,7 @@ export default {
     }
 
     return {
-      address,
+      // address,
       isTextShown,
       showText,
     };

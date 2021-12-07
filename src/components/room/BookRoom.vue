@@ -2,7 +2,7 @@
   <div class="card book-room-card">
     <div class="book-room-card--price">
       <h1 class="d-inline mr-1">
-        {{ convertCurrency(defaultPrice.nightly_price, locale) }}
+        {{ defaultPrice.normal_day_price }} {{ $t("shared.currency." + currency) }}
       </h1>
       <p class="d-inline">/1 {{ $t("shared.night") }}</p>
     </div>
@@ -21,16 +21,31 @@
       <guest-picker :defaultGuests="guestSearch" @pick-guest="pickGuest" />
     </div>
 
-    <template v-if="detail.roomId">
+    <template v-if="detailPrice">
       <div class="d-flex align-items-center justify-content-between mt-2">
-        <span>{{ $t("pages.room.price_a_night") }}</span>
-        <span>{{ convertCurrency(detail.totalBasePricePlain, locale) }}</span>
+        <span>{{ $t("pages.room.normal_day_price") }}</span>
+        <span>{{ defaultPrice.normal_day_price }} {{ $t("shared.currency." + currency) }}</span>
       </div>
 
       <div class="d-flex align-items-center justify-content-between mt-2">
+        <span>{{ $t("pages.room.num_of_workday") }}</span>
+        <span>{{ detailPrice.workDays }} {{ $t("shared.night") }}</span>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-2">
+        <span>{{ $t("pages.room.weekend_price") }}</span>
+        <span>{{ defaultPrice.weekend_price }} {{ $t("shared.currency." + currency) }}</span>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-2">
+        <span>{{ $t("pages.room.num_of_weekend") }}</span>
+        <span>{{ detailPrice.weekendDays }} {{ $t("shared.night") }}</span>
+      </div>
+
+      <!-- <div class="d-flex align-items-center justify-content-between mt-2">
         <span>{{ $t("pages.room.service_price") }}</span>
         <span>{{ convertCurrency(detail.serviceFee, locale) }}</span>
-      </div>
+      </div> -->
 
       <el-divider></el-divider>
 
@@ -39,7 +54,7 @@
           ><strong>{{ $t("pages.room.total") }}</strong></span
         >
         <span
-          ><strong>{{ convertCurrency(detail.total, locale) }}</strong></span
+          ><strong>{{ detailPrice.totalPrice }}</strong></span
         >
       </div>
     </template>
@@ -61,15 +76,11 @@ import { useRouter } from "vue-router";
 import GuestPicker from "@/components/shared/GuestPicker";
 
 import { i18n } from "@/plugins/i18n/i18n";
-import { convertCurrency } from "@/helpers/sharedHelpers.js";
+import { convertCurrency, getBusinessDatesCount } from "@/helpers/sharedHelpers.js";
 
 export default {
   props: {
     defaultPrice: {
-      type: Object,
-      default: () => ({}),
-    },
-    detail: {
       type: Object,
       default: () => ({}),
     },
@@ -81,6 +92,10 @@ export default {
       type: [String, Number],
       default: ""
     },
+    currency: {
+      type: String,
+      default: 'usd'
+    }
   },
 
   emits: ["book-room"],
@@ -116,6 +131,26 @@ export default {
       guestSearch.value = guestObj;
     }
 
+    let detailPrice = computed(() => {
+      if (dateRangeSearch.value.length != 2) return false
+
+      const defaultDayPrice = props.defaultPrice.normal_day_price
+      const defaultWeekendPrice = props.defaultPrice.weekend_price
+
+      const totalDays = Math.floor(
+        (new Date(dateRangeSearch.value[1]) - new Date(dateRangeSearch.value[0])) /
+          (1000*60*60*24)
+      ) + 1
+      const workDays = getBusinessDatesCount(new Date(dateRangeSearch.value[0]), new Date(dateRangeSearch.value[1]))
+      console.log(totalDays, workDays, defaultDayPrice, defaultWeekendPrice)
+      return {
+        totalDays,
+        workDays,
+        weekendDays: totalDays - workDays,
+        totalPrice: workDays * defaultDayPrice + (totalDays - workDays) * defaultWeekendPrice
+      }
+    })
+
     onMounted(() => getDefaultInput());
 
     const router = useRouter();
@@ -147,6 +182,7 @@ export default {
       dateRangeSearch,
       guestSearch,
       pickGuest,
+      detailPrice,
       locale: i18n.global.locale,
       convertCurrency,
       bookRoom,

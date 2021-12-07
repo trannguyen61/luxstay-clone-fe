@@ -78,7 +78,10 @@ export default {
     signout: "Đăng xuất",
     my_book: "Đặt chỗ của tôi",
     no_data: "Không tìm thấy kết quả phù hợp",
-    pending: "Chờ thanh toán"
+    pending: "Chờ thanh toán",
+    allowed: "Cho phép",
+    unallowed: "Không cho phép",
+    charge: "Tính phí"
   },
   places: {
     hanoi: "Hà Nội",
@@ -133,14 +136,23 @@ export default {
         repay_100_no_service: "Hoàn tiền 100% (trừ phí dịch vụ)",
         "5_day_to_checkin": "5 ngày trước check-in",
         repay_50: "Hoàn 50% (trừ phí đêm đầu tiên, phí dịch vụ và các phí kèm theo)",
-        checkin: "Check-in"
+        checkin: "Check-in",
+        special_rules: "Luật lệ riêng",
+        smoking: "Hút thuốc",
+        pet: "Thú nuôi",
+        cooking: "Nấu nướng",
+        party: "Tổ chức tiệc"
       },
       map: "Bản đồ",
       price_a_night: "Giá thuê",
       service_price: "Phí dịch vụ",
       total: "Tổng tiền",
       book_now: "Đặt ngay",
-      review: "Đánh giá"
+      review: "Đánh giá",
+      cleaning_price: "Phí lau dọn",
+      normal_day_price: "Thứ hai - Thứ năm",
+      num_of_workday: "Số ngày thường",
+      num_or_weekend: "Số ngày cuối tuần"
     },
     book: {
       book_info: "Thông tin đặt chỗ",

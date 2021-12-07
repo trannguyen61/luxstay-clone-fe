@@ -27,6 +27,7 @@
     text-overflow: ellipsis;
     max-height: 300px;
     position: relative;
+    text-align: justify;
 
     &::before {
       content: "";
