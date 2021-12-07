@@ -9,7 +9,7 @@ class ResponseHelper {
 
   isSuccess() {
     return (
-      (this.status === 200 || this.status == 201) && !this.error && this.success
+      (this.status === 200 || this.status == 201)
     );
   }
 

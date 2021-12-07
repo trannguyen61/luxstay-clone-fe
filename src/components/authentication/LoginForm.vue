@@ -58,11 +58,19 @@
 
 <script>
 import { computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { ElNotification } from "element-plus";
+
 import useAuthenForm from "@/composables/useAuthenForm";
+
+import authApi from '@/api/services/authApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
 
 export default {
   setup() {
-    // const store = useStore();
+    const store = useStore();
     let {
       email,
       password,
@@ -72,7 +80,48 @@ export default {
       changePassword,
     } = useAuthenForm();
 
-    const login = () => {};
+    const router = useRouter();
+
+    const login = async () => {
+      const reqBody = {
+        "email": email.value,
+        "password": password.value
+      }
+
+      const handler = new ApiHandler()
+                          .setData(reqBody)
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            
+                            if (data.isSuccess()) {
+                              store.commit('changeToken', data.data.token)
+                              store.commit('changeUser', data.data.user)
+
+                              ElNotification({
+                                title: "Logged in successfully!",
+                                message: "Welcome to Lxstay!",
+                                type: "success",
+                              });
+                              
+                              router.push({
+                                name: "Home"
+                              });
+                            } else {
+                              ElNotification({
+                                title: "Can't sign in",
+                                message: data.error,
+                                type: "error",
+                              });
+                            }
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return authApi.postSignIn(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    };
 
     const notValidForm = computed(() => {
       return !email.value || !password.value;

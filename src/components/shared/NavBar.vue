@@ -35,14 +35,16 @@
       v-if="checkIsMdOrAboveScreen"
       class="navbar--info d-flex align-items-center"
     >
-      <router-link class="link text-bold navbar--link" to="#">{{
-        $t("shared.login")
-      }}</router-link>
-      <router-link class="link text-bold navbar--link" to="#">{{
-        $t("shared.signup")
-      }}</router-link>
+      <template v-if="!isLoggedIn">
+        <router-link class="link text-bold navbar--link" :to="{ name: 'Login' }">{{
+          $t("shared.login")
+        }}</router-link>
+        <router-link class="link text-bold navbar--link" :to="{ name: 'Signup' }">{{
+          $t("shared.signup")
+        }}</router-link>
+      </template>
 
-      <logged-member-picker />
+      <logged-member-picker v-else />
       <setting-picker />
     </div>
 
@@ -57,6 +59,7 @@
 <script>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 import GuestPicker from "./GuestPicker.vue";
 import SettingPicker from "./SettingPicker.vue";
@@ -105,6 +108,10 @@ export default {
       });
     }
 
+    const store = useStore()
+
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+
     return {
       locationSearch,
       dateRangeSearch,
@@ -112,6 +119,7 @@ export default {
       checkIsMdOrAboveScreen,
       checkIsXsScreen,
       search,
+      isLoggedIn
     };
   },
 };

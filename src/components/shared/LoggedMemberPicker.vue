@@ -43,6 +43,7 @@
 
 <script>
 import { computed } from "vue";
+import { useStore } from "vuex";
 
 import useDialog from "@/composables/useDialog.js";
 import { i18n } from "@/plugins/i18n/i18n";
@@ -61,7 +62,10 @@ export default {
 
     let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window));
 
-    const signout = () => {};
+    const store = useStore()
+    const signout = () => {
+      store.commit('changeToken', '')
+    };
 
     return {
       items,

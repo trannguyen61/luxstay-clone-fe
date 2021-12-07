@@ -7,3 +7,7 @@ export const PLACE = '/place'
 export const GET_PLACE_BY_CITY = PLACE + '/city'
 export const PAGE = '/page'
 export const COUNT = '/count'
+
+export const AUTH = '/auth'
+export const SIGNUP = AUTH + '/signup'
+export const SIGNIN = AUTH + '/signin'
