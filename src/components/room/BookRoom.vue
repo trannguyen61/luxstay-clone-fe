@@ -54,7 +54,7 @@
           ><strong>{{ $t("pages.room.total") }}</strong></span
         >
         <span
-          ><strong>{{ detailPrice.totalPrice }}</strong></span
+          ><strong>{{ detailPrice.totalPrice }} {{ $t("shared.currency." + currency) }}</strong></span
         >
       </div>
     </template>
@@ -72,11 +72,13 @@
 <script>
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 import GuestPicker from "@/components/shared/GuestPicker";
 
 import { i18n } from "@/plugins/i18n/i18n";
 import { convertCurrency, getBusinessDatesCount } from "@/helpers/sharedHelpers.js";
+import { ElNotification } from "element-plus";
 
 export default {
   props: {
@@ -155,7 +157,21 @@ export default {
 
     const router = useRouter();
 
+    const store = useStore()
+
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+
     function bookRoom() {
+      if (!isLoggedIn.value) {
+        ElNotification({
+          title: "Please log in first",
+          message: "",
+          type: "error",
+        });
+
+        return
+      }
+
       context.emit("book-room");
 
       const searchQuery = {

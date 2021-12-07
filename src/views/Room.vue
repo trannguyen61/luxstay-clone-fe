@@ -120,7 +120,7 @@ export default {
     }
 
     function bookRoom() {
-      store.commit("changeCurrentRoom", DETAILED_ROOM);
+      store.commit("changeCurrentRoom", detailedRoom.value);
     }
 
     onMounted(() => {

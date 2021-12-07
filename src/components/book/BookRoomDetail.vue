@@ -35,21 +35,21 @@
 
     <div>
       <div class="d-flex justify-content-between">
-        <small class="m-0">{{ $t("pages.room.price_a_night") }} {{ dateDiff }} {{ $t("shared.night") }}</small>
-        <small class="m-0">{{  }}</small>
+        <small class="m-0">{{ $t("pages.room.price_a_night") }} {{ dateDiff + 1 }} {{ $t("shared.night") }}</small>
+        <small class="m-0">{{ detailPrice.totalPrice }} {{ $t("shared.currency." + currency) }}</small>
       </div>
 
-      <div class="d-flex justify-content-between">
+      <!-- <div class="d-flex justify-content-between">
         <small class="m-0">{{ $t("pages.room.service_price") }}</small>
         <small class="m-0">{{  }}</small>
-      </div>
+      </div> -->
     </div>
 
     <el-divider></el-divider>
 
     <div class="d-flex justify-content-between">
       <small class="m-0"><strong>{{ $t("pages.room.total") }}</strong></small>
-      <small class="m-0">{{  }}</small>
+      <small class="m-0">{{ detailPrice.totalPrice }} {{ $t("shared.currency." + currency) }}</small>
     </div>
 
     <el-divider></el-divider>
@@ -67,19 +67,20 @@ import { useStore } from "vuex";
 
 import useBookRouteQuery from "@/composables/useBookRouteQuery";
 
-import { convertDate } from "@/helpers/sharedHelpers"
+import { convertDate, getBusinessDatesCount } from "@/helpers/sharedHelpers"
 
 export default {
   setup() {
     const store = useStore();
+    // const currentRoom = computed(() => store.state.currentRoom)
     const name = computed(() => store.state.currentRoom.name);
-    const address = computed(() => {
-      console.log(store.state.currentRoom);
-      const addObj = store.state.currentRoom.address.data;
-      return `${addObj.city}, ${addObj.state}, ${addObj.country}`;
-    });
+    const address = computed(() => store.state.currentRoom.address);
+    const currency = computed(() => {
+      if (store.state.currentRoom.name) return store.state.currentRoom.policy_attributes.currency
+      else return 'usd'
+    })
 
-    const featuredPhoto = computed(() => store.state.currentRoom.featured_photo)
+    const featuredPhoto = computed(() => store.state.currentRoom.image)
 
     let {
       totalGuestsText,
@@ -92,9 +93,28 @@ export default {
       roomId
     } = useBookRouteQuery();
 
+    let detailPrice = computed(() => {
+      if (!store.state.currentRoom.name) return {}
+
+      console.log(store.state.currentRoom)
+      const defaultDayPrice = store.state.currentRoom.schedule_price_attributes.normal_day_price
+      const defaultWeekendPrice = store.state.currentRoom.schedule_price_attributes.weekend_price
+
+      const totalDays = dateDiff.value
+      const workDays = getBusinessDatesCount(new Date(checkin), new Date(checkout))
+      console.log(totalDays, workDays, defaultDayPrice, defaultWeekendPrice)
+      return {
+        totalDays,
+        workDays,
+        weekendDays: totalDays - workDays,
+        totalPrice: workDays * defaultDayPrice + (totalDays - workDays) * defaultWeekendPrice
+      }
+    })
+
     return {
       name,
       address,
+      currency,
       featuredPhoto,
       totalGuestsText,
       checkin,
@@ -103,7 +123,8 @@ export default {
       grownupGuests,
       kidGuests,
       babyGuests,
-      convertDate
+      convertDate,
+      detailPrice
     };
   },
 };

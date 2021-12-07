@@ -11,3 +11,6 @@ export const COUNT = '/count'
 export const AUTH = '/auth'
 export const SIGNUP = AUTH + '/signup'
 export const SIGNIN = AUTH + '/signin'
+
+export const BOOK = '/booking'
+export const POST_NEW_BOOKING = BOOK + '/new'

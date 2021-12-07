@@ -152,7 +152,7 @@ export default {
       cleaning_price: "Phí lau dọn",
       normal_day_price: "Thứ hai - Thứ năm",
       num_of_workday: "Số ngày thường",
-      num_or_weekend: "Số ngày cuối tuần"
+      num_of_weekend: "Số ngày cuối tuần"
     },
     book: {
       book_info: "Thông tin đặt chỗ",

@@ -109,7 +109,7 @@
       </el-select>
     </div>
 
-    <el-button class="el-button--active mt-3" @click="bookRoom">
+    <el-button class="el-button--active mt-3" @click="onBookRoom">
       {{ $t("pages.room.book_now") }}
     </el-button>
   </div>
@@ -142,6 +142,17 @@ export default {
     let email = ref("");
     let country = ref("");
 
+    function onBookRoom() {
+      const reqBody = {
+        "start_date": checkin.value,
+        "end_date": checkout.value,
+        "num_of_people": totalGuests.value,
+        "place_id": roomId.value,
+        "coupon_code": ""
+      }
+      props.bookRoom(reqBody)
+    }
+
     let {
       totalGuestsText,
       checkin,
@@ -150,6 +161,8 @@ export default {
       grownupGuests,
       kidGuests,
       babyGuests,
+      totalGuests,
+      roomId
     } = useBookRouteQuery();
 
     let currentRoomName = store.state.currentRoom.name;
@@ -167,6 +180,7 @@ export default {
       grownupGuests,
       kidGuests,
       babyGuests,
+      onBookRoom,
       COUNTRIES,
       COUNTRY_PHONE_CODE,
     };

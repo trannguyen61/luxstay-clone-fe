@@ -14,6 +14,7 @@ export default function () {
   let checkin = computed(() => route.query.checkin);
   let checkout = computed(() => route.query.checkout);
   let roomId = computed(() => route.query.roomId)
+  let totalGuests = computed(() => route.query.totalGuests)
 
   let dateDiff = computed(() =>
     Math.floor(
@@ -30,6 +31,7 @@ export default function () {
     grownupGuests,
     kidGuests,
     babyGuests,
-    roomId
+    roomId,
+    totalGuests
   };
 }
