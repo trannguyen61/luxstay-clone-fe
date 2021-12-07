@@ -25,10 +25,17 @@ export default {
     baby: "trẻ sơ sinh",
     type: {
       apartment: "Chung cư",
+      hostel: "Hostel",
+      homestay: "Homestay",
+      motel: "Motel",
+      villa: "Villa",
+      penhouse: "Penhouse"
     },
     currency: {
       VND: "đ",
       USD: "đô",
+      vnd: "đ",
+      usd: "đô",
     },
 
     navbar: {

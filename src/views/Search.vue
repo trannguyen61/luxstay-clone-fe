@@ -60,7 +60,7 @@
 
     <div class="row">
       <div
-        v-for="item in ROOM_PREVIEW_LIST.items"
+        v-for="item in roomList"
         :key="item.id"
         class="col-xs-6 col-md-3 col-lg-20"
       >
@@ -72,16 +72,21 @@
       <el-pagination
         layout="prev, pager, next"
         :page-size="PAGINATION_SIZE"
-        :total="ROOM_PREVIEW_LIST.total"
+        :total="totalPage"
+        :current-page="page.value"
         class="d-inline-block"
+        @next-click="onNextPage"
+        @prev-click="onPrevPage"
+        @update:current-page="changePage"
       ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 import SlickCarousel from "@/components/shared/SlickCarousel.vue";
 import RoomPreview from "@/components/search/RoomPreview.vue";
@@ -97,6 +102,10 @@ import {
 
 import { ROOM_PREVIEW_LIST } from "@/test/testData.js";
 
+import placeApi from '@/api/services/placeApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
+
 export default {
   name: "Search",
 
@@ -104,6 +113,7 @@ export default {
 
   setup() {
     const store = useStore();
+    const route = useRoute();
 
     let currency = computed(() => store.state.currency);
 
@@ -123,11 +133,79 @@ export default {
 
     let filterOption = ref("");
 
+    let roomList = ref([])
+    let totalPage = ref(1)
+
+    let page = ref(1)
+    let place = ref(route.query.place)
+
+    async function onGetTotalNumberOfPlaceInCity() {
+      const handler = new ApiHandler()
+                          .setData({place: place.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            totalPage.value = Math.ceil(data.data / 20)
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.getTotalNumberOfPlaceInCity(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
+    async function onGetPlaceByCity() {
+      const handler = new ApiHandler()
+                          .setData({place: place.value, page: page.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            roomList.value = data.data
+                          })
+                          .setOnFinally(() => {})
+
+      const onRequest = async () => {
+        return placeApi.getPlaceByCity(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
+    function onNextPage() {
+      if (page.value == totalPage.value) return
+
+      page.value = page.value + 1
+      onGetPlaceByCity()
+    }
+
+    function onPrevPage() {
+      if (page.value == 1) return
+
+      page.value = page.value - 1
+      onGetPlaceByCity()
+    }
+    
+    function changePage(data) {
+      page.value = data
+      onGetPlaceByCity()
+    }
+
+    onMounted(() => {
+      onGetTotalNumberOfPlaceInCity()
+      onGetPlaceByCity()
+    })
+
     return {
       currency,
       placeSlickItemNumber,
       checkIsMdOrAboveScreen,
       filterOption,
+      roomList,
+      totalPage,
+      page,
+      onNextPage,
+      onPrevPage,
+      changePage,
       INTERESTING_PLACES,
       FILTER_OPTIONS,
       ROOM_PREVIEW_LIST,

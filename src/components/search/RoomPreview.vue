@@ -1,8 +1,8 @@
 <template>
   <div class="room-preview mb-5">
-    <router-link to="#">
+    <router-link :to="{ name: 'Room', query: { id: item.id } }">
       <div class="img-wrap">
-        <img :src="require('@/assets/images/hanoi.png')" alt="" />
+        <img :src="`${item.image}`" alt="" />
       </div>
     </router-link>
     <div
@@ -15,23 +15,23 @@
       "
     >
       <small>{{
-        `${$t("shared.type." + item.type)} - ${item.bedroom} ${$t(
+        `${$t("shared.type." + item.place_type)} - ${item.room_attributes.num_of_bedroom} ${$t(
           "shared.bedroom"
         )}`
       }}</small>
-      <div class="rating">
+      <div class="rating" v-if="item.ratings.length">
         <font-awesome-icon icon="star" color="#ffcd3c" />
         {{ item.rating }}
         <small>({{ item.rated_by }})</small>
       </div>
     </div>
     <router-link to="#">
-      <div class="room-preview--title">{{ item.title }}</div>
+      <div class="room-preview--title">{{ item.name }}</div>
     </router-link>
     <strong class="room-preview--price">
       <small
         >{{
-          `${item.vnd_price}${$t("shared.currency." + currency)}/${$t(
+          `${item.schedule_price_attributes.normal_day_price}${$t("shared.currency." + item.policy_attributes.currency)}/${$t(
             "shared.night"
           )}`
         }}

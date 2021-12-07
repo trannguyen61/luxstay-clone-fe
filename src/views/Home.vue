@@ -41,7 +41,7 @@
       <router-link
         v-for="item in INTERESTING_PLACES"
         :key="item.name"
-        to="#"
+        :to="{ name: 'Search', query: { place: item.link } }"
         class="place-link"
       >
         <div class="p-relative h-100">
