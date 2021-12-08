@@ -112,7 +112,7 @@ export default {
         return
       }
 
-      if (store.state.bookedList.length) {
+      if (store.state.user.bookedList.length) {
         list.value = store.state.user.bookedList
         return
       }

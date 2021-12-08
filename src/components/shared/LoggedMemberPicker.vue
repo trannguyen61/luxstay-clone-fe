@@ -57,6 +57,11 @@ export default {
         icon: "calendar",
         title: i18n.global.t("shared.my_book"),
       },
+      {
+        link: { name: 'User', query: { tab: 'bookmark' } },
+        icon: "heart",
+        title: i18n.global.t("shared.bookmark"),
+      },
     ];
     let { isDialogOpened, toggleDialog } = useDialog();
 

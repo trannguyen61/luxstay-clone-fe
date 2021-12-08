@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axios'
 
-import { GET_PLACE_BY_CITY, PAGE, COUNT, PLACE, RATING, POST_NEW_RATING, GET_CHECK_BOOKMARK, POST_NEW_BOOKMARK, DELETE_BOOKMARK } from '../baseApi'
+import { GET_PLACE_BY_CITY, PAGE, COUNT, PLACE, RATING, POST_NEW_RATING, GET_CHECK_BOOKMARK, POST_NEW_BOOKMARK, DELETE_BOOKMARK, BOOKMARK } from '../baseApi'
 
 export default {
     getPlaceByCity({ place, page }) {
@@ -25,6 +25,9 @@ export default {
         return axiosInstance.post(POST_NEW_BOOKMARK, reqBody)
     },
     deleteBookmark(reqBody) {
-        return axiosInstance.delete(DELETE_BOOKMARK, reqBody)
+        return axiosInstance.delete(DELETE_BOOKMARK, { data: reqBody })
+    },
+    getUserBookmark() {
+        return axiosInstance.get(BOOKMARK)
     }
 }
