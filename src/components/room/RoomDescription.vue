@@ -1,10 +1,22 @@
 <template>
   <div class="d-flex align-items-center justify-content-between">
     <h1>{{ room.name }}</h1>
-    <div class="room-page--host">
-      <router-link to="/">
-        <i class="el-icon-user"></i>
-      </router-link>
+
+    <div class="d-flex align-items-center">
+      <el-button type="danger" round v-if="!isBookmarked" @click="bookmark">
+        {{ $t("shared.bookmark") }}
+        <font-awesome-icon icon="heart" class="ml-1" />
+      </el-button>
+      <el-button round v-else @click="removeBookmark">
+        {{ $t("shared.rmv_bookmark") }}
+        <font-awesome-icon icon="heart" class="ml-1" />
+      </el-button>
+
+      <div class="room-page--host ml-3">
+        <router-link to="/">
+          <i class="el-icon-user"></i>
+        </router-link>
+      </div>
     </div>
   </div>
   <div class="d-flex align-items-center mb-1">
@@ -45,6 +57,18 @@ export default {
       type: Object,
       required: true,
     },
+    isBookmarked: {
+      type: Boolean,
+      default: false
+    },
+    bookmark: {
+      type: Function,
+      default: () => {}
+    },
+    removeBookmark: {
+      type: Function,
+      default: () => {}
+    }
   },
 
   setup(props) {

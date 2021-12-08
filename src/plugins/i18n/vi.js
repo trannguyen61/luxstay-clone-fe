@@ -82,7 +82,9 @@ export default {
     allowed: "Cho phép",
     unallowed: "Không cho phép",
     charge: "Tính phí",
-    total_price: "Tông chi phí"
+    total_price: "Tông chi phí",
+    bookmark: "Yêu thích",
+    rmv_bookmark: "Bỏ yêu thích"
   },
   places: {
     hanoi: "Hà Nội",

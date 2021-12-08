@@ -81,7 +81,9 @@ export default {
     allowed: "Allowed",
     unallowed: "Unallowed",
     charge: "Charge",
-    total_price: "Total price"
+    total_price: "Total price",
+    bookmark: "Bookmark",
+    rmv_bookmark: "Delete bookmark"
   },
   places: {
     hanoi: "Hanoi",

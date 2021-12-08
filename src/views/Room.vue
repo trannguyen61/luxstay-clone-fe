@@ -12,7 +12,12 @@
           class="mt-3 mb-3"
           :items="[{name: detailedRoom.address}]"
         ></place-breadcrumb>
-        <room-description :room="detailedRoom"></room-description>
+        <room-description
+          :room="detailedRoom"
+          :isBookmarked="isBookmarked"
+          :bookmark="onPostNewBookmark"
+          :removeBookmark="onDeleteBookmark"
+        ></room-description>
         <div class="spacer"></div>
         <room-amenity
           :amenity="detailedRoom.place_facilities_attributes"
@@ -70,6 +75,7 @@ import {
 import placeApi from '@/api/services/placeApi.js'
 import ApiHandler from '@/helpers/ApiHandler'
 import ResponseHelper from '@/helpers/ResponseHelper'
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -143,9 +149,98 @@ export default {
       store.commit("changeCurrentRoom", detailedRoom.value);
     }
 
+    let isBookmarked = ref(false)
+
+    async function onGetCheckBookmark() {
+      const reqBody = {
+        place_id: roomId
+      }
+
+      const handler = new ApiHandler()
+                          .setData(reqBody)
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            isBookmarked.value = data.data
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.getCheckBookMark(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
+    async function onPostNewBookmark() {
+      const reqBody = {
+        place_id: roomId
+      }
+
+      const handler = new ApiHandler()
+                          .setData(reqBody)
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            if (data.isError()) {
+                              ElNotification({
+                                title: "Oh no! There's an error bookmarking this room",
+                                message: data.error,
+                                type: "error",
+                              });
+                            } else {
+                              isBookmarked.value = true
+                              ElNotification({
+                                title: "Successfully!",
+                                message: "This place has been bookmarked",
+                                type: "success",
+                              });
+                            }
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.postNewBookmark(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
+    async function onDeleteBookmark() {
+      const reqBody = {
+        place_id: roomId
+      }
+
+      const handler = new ApiHandler()
+                          .setData(reqBody)
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            if (data.isError()) {
+                              ElNotification({
+                                title: "Oh no! There's an error removing bookmark",
+                                message: data.error,
+                                type: "error",
+                              });
+                            } else {
+                              isBookmarked.value = false
+                              ElNotification({
+                                title: "Successfully!",
+                                message: "Bookmark has been removed",
+                                type: "success",
+                              });
+                            }
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.deleteBookmark(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     onMounted(() => {
       onGetPlaceById()
       onGetPlaceRatings()
+      onGetCheckBookmark()
     })
 
     return {
@@ -154,6 +249,9 @@ export default {
       detailedRoom,
       imageArray,
       roomReviews,
+      isBookmarked,
+      onPostNewBookmark,
+      onDeleteBookmark,
       IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
       ROOM_AVAILABILITY,

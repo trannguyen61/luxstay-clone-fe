@@ -17,3 +17,8 @@ export const POST_NEW_BOOKING = BOOK + '/new'
 export const GET_BOOKING_BY_USER = BOOK + '/user'
 export const RATING = '/ratings'
 export const POST_NEW_RATING = '/rating/new'
+
+export const BOOKMARK = '/bookmark'
+export const GET_CHECK_BOOKMARK = BOOKMARK + '/check'
+export const POST_NEW_BOOKMARK = BOOKMARK + '/new'
+export const DELETE_BOOKMARK = BOOKMARK + '/remove'
