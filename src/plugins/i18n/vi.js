@@ -153,7 +153,9 @@ export default {
       cleaning_price: "Phí lau dọn",
       normal_day_price: "Thứ hai - Thứ năm",
       num_of_workday: "Số ngày thường",
-      num_of_weekend: "Số ngày cuối tuần"
+      num_of_weekend: "Số ngày cuối tuần",
+      write_your_review: "Viết cảm nhận của bạn về địa điểm này",
+      post_review: "Đăng bình luận"
     },
     book: {
       book_info: "Thông tin đặt chỗ",

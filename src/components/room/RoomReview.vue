@@ -1,6 +1,27 @@
 <template>
   <h3>{{ $t("pages.room.review") }}</h3>
 
+  <div class="room-page--create-a-review mt-2" v-if="ableToWriteAReview">
+    <span class="demonstration">{{ $t("pages.room.write_your_review") }}</span>
+    <el-rate v-model="inputRating" class="mt-2 mb-2"></el-rate>
+    <el-input
+      v-model="inputComment"
+      :rows="2"
+      type="textarea"
+      placeholder=""
+      class="mb-2"
+    />
+    <el-button
+      round
+      class="el-button--active mt-2"
+      @click="postNewRating"
+    >
+      {{ $t("pages.room.post_review") }}
+    </el-button>
+
+    <el-divider></el-divider>
+  </div>
+
   <div class="room-page--review mt-2" v-for="review in reviews" :key="review.id">
     <div class="d-flex align-items-center mb-2">
       <div class="room-page--host">
@@ -25,7 +46,16 @@
 </template>
 
 <script>
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from "vuex";
 import { convertDate } from "@/helpers/sharedHelpers"
+
+import bookApi from '@/api/services/bookApi.js'
+import placeApi from '@/api/services/placeApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
+
+import { ElNotification } from "element-plus";
 
 export default {
   props: {
@@ -33,12 +63,96 @@ export default {
       type: Array,
       default: () => [],
     },
+    roomId: {
+      type: [String, Number],
+      default: ""
+    },
   },
 
-  setup() {
-      return {
-          convertDate
+  setup(props) {
+    let inputRating = ref(0)
+    let inputComment = ref("")
+
+    const store = useStore()
+    let bookedList = computed(() => store.state.user.bookedList)
+    let userId = computed(() => store.state.user.user.id)
+
+    let ableToWriteAReview = computed(() => {
+      if (!bookedList.value.length) {
+        getBookedRoomList()
+        return
       }
+
+      return bookedList.value.map(e => e.place_id).includes(props.roomId)
+    })
+
+    onMounted(() => {
+      if (!bookedList.value.length) {
+        getBookedRoomList()
+      }
+    })
+
+    const getBookedRoomList = async () => {
+      const handler = new ApiHandler()
+                          .setData({id: userId.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            store.commit('changeBookedList', data.data)
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return bookApi.getBookingByUser(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    };
+
+    const postNewRating = async () => {
+      if (!inputRating.value || inputComment.value == '') return
+      const reqBody = {
+        score: inputRating.value,
+        comment: inputComment.value
+      }
+
+      const handler = new ApiHandler()
+                          .setData({id: props.roomId, reqBody})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            
+                            if (data.isSuccess()) {
+                              ElNotification({
+                                title: "Posted comment successfully!",
+                                message: "Thanks for your feedback.",
+                                type: "success",
+                              });
+
+                              inputComment.value = ''
+                              inputRating.value = 0
+                            } else {
+                              ElNotification({
+                                title: "Oh no! There's an error posting your comment",
+                                message: "Please try again",
+                                type: "error",
+                              });
+                            }
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.postNewRating(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    };
+
+    return {
+      convertDate,
+      inputRating,
+      inputComment,
+      ableToWriteAReview,
+      postNewRating
+    }
   }
 };
 </script>

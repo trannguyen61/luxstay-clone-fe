@@ -1,7 +1,8 @@
 export default {
     state: {
         token: "",
-        user: {}
+        user: {},
+        bookedList: []
     },
     getters: {
         isLoggedIn(state) {
@@ -16,6 +17,9 @@ export default {
         changeUser(state, value) {
             state.user = value
             localStorage.setItem('user', JSON.stringify(value))
+        },
+        changeBookedList(state, value) {
+            state.bookedList = value
         }
     },
     actions: {} 

@@ -22,7 +22,9 @@
           :price="detailedRoom.schedule_price_attributes"
           :currency="detailedRoom.policy_attributes.currency"></room-price>
         <div class="spacer"></div>
-        <room-review :reviews="detailedRoom.ratings"></room-review>
+        <room-review 
+          :reviews="roomReviews"
+          :roomId="detailedRoom.id"></room-review>
         <div class="spacer"></div>
         <room-repay-rules :time="detailedRoom.rule_attributes"></room-repay-rules>
         <div class="spacer"></div>
@@ -119,12 +121,31 @@ export default {
       await handler.setOnRequest(onRequest).execute()
     }
 
+    let roomReviews = ref([])
+
+    async function onGetPlaceRatings() {
+      const handler = new ApiHandler()
+                          .setData({id: roomId})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            roomReviews.value = data.data
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return placeApi.getPlaceRatings(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     function bookRoom() {
       store.commit("changeCurrentRoom", detailedRoom.value);
     }
 
     onMounted(() => {
       onGetPlaceById()
+      onGetPlaceRatings()
     })
 
     return {
@@ -132,6 +153,7 @@ export default {
       centerMap,
       detailedRoom,
       imageArray,
+      roomReviews,
       IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
       ROOM_AVAILABILITY,

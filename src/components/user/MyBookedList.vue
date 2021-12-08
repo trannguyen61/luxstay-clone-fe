@@ -112,11 +112,17 @@ export default {
         return
       }
 
+      if (store.state.bookedList.length) {
+        list.value = store.state.user.bookedList
+        return
+      }
+
       const handler = new ApiHandler()
                           .setData({id: userId.value})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             list.value = data.data
+                            store.commit('changeBookedList', data.data)
                           })
                           .setOnFinally(() => {})
       

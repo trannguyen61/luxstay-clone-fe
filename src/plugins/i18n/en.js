@@ -151,7 +151,9 @@ export default {
       cleaning_price: "Cleaning price",
       normal_day_price: "Normal day price",
       num_of_workday: "Number of workdays",
-      num_of_weekend: "Number of weekend days"
+      num_of_weekend: "Number of weekend days",
+      write_your_review: "Write your review",
+      post_review: "Post your review"
     },
     book: {
       book_info: "Booking information",

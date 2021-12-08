@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axios'
 
-import { GET_PLACE_BY_CITY, PAGE, COUNT, PLACE } from '../baseApi'
+import { GET_PLACE_BY_CITY, PAGE, COUNT, PLACE, RATING, POST_NEW_RATING } from '../baseApi'
 
 export default {
     getPlaceByCity({ place, page }) {
@@ -11,5 +11,11 @@ export default {
     },
     getPlaceById({ id }) {
         return axiosInstance.get(`${PLACE}/${id}`)
+    },
+    getPlaceRatings({ id }) {
+        return axiosInstance.get(`${PLACE}/${id}${RATING}`)
+    },
+    postNewRating({ id, reqBody }) {
+        return axiosInstance.post(`${PLACE}/${id}${POST_NEW_RATING}`, reqBody)
     }
 }
