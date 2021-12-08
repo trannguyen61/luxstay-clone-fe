@@ -53,7 +53,7 @@ export default {
   setup() {
     const items = [
       {
-        link: "#",
+        link: { name: 'User' },
         icon: "calendar",
         title: i18n.global.t("shared.my_book"),
       },
@@ -65,6 +65,7 @@ export default {
     const store = useStore()
     const signout = () => {
       store.commit('changeToken', '')
+      store.commit('changeUser', '')
     };
 
     return {

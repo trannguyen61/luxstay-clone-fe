@@ -50,7 +50,11 @@
           :description="$t('shared.no_data')"
         ></el-empty>
         <div v-else class="my-booked-list--list">
-          <booked-room-item v-for="(item, i) in list" :key="i" :item="item" />
+          <el-row :gutter="20">
+            <el-col v-for="(item, i) in list" :key="i" :span="24" :md="12" >
+              <booked-room-item :item="item" />
+            </el-col>
+          </el-row>
         </div>
       </div>
     </div>
@@ -58,12 +62,17 @@
 </template>
 
 <script>
-import { computed, watch, ref } from "vue";
+import { computed, watch, ref, onMounted } from "vue";
 import { i18n } from "@/plugins/i18n/i18n";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import { BOOKED_ROOM } from "@/test/testData";
 
 import BookedRoomItem from "@/components/user/BookedRoomItem";
+import bookApi from '@/api/services/bookApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
 
 export default {
   components: { BookedRoomItem },
@@ -92,19 +101,46 @@ export default {
       },
     ]);
 
-    const getBookedRoomList = () => {};
+    const store = useStore();
+    let userId = computed(() => store.state.user.user.id)
+
+    const router = useRouter()
+
+    const getBookedRoomList = async () => {
+      if (!userId.value) {
+        router.push({ name: "Login" })
+        return
+      }
+
+      const handler = new ApiHandler()
+                          .setData({id: userId.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            list.value = data.data
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return bookApi.getBookingByUser(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    };
 
     watch(
       () => bookType,
       () => getBookedRoomList()
     );
-    watch(
-      () => monthRange,
-      () => getBookedRoomList()
-    );
 
-    // Change this on applying api
-    list.value = BOOKED_ROOM;
+    onMounted(() => {
+      getBookedRoomList()
+    })
+
+    // TO DO: FILTER ON MONTH RANGE
+    // watch(
+    //   () => monthRange,
+    //   () => getBookedRoomList()
+    // );
 
     return {
       bookType,

@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -111,6 +111,19 @@ export default {
     const store = useStore()
 
     let isLoggedIn = computed(() => store.getters.isLoggedIn)
+    let user = computed(() => store.state.user.user)
+
+    onMounted(() => {
+      console.log(isLoggedIn.value, user.value, localStorage.getItem('token'), localStorage.getItem('user'))
+      if (!isLoggedIn.value && localStorage.getItem('token') != "") {
+        store.commit('changeToken', localStorage.getItem('token'))
+      }
+
+      if (!user.value.id && localStorage.getItem('user') != "") {
+        store.commit('changeUser', JSON.parse(localStorage.getItem('user')))
+      }
+      console.log(isLoggedIn.value, user.value, localStorage.getItem('token'), localStorage.getItem('user'))
+    })
 
     return {
       locationSearch,

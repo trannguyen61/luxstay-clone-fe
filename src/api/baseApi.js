@@ -14,3 +14,4 @@ export const SIGNIN = AUTH + '/signin'
 
 export const BOOK = '/booking'
 export const POST_NEW_BOOKING = BOOK + '/new'
+export const GET_BOOKING_BY_USER = BOOK + '/user'

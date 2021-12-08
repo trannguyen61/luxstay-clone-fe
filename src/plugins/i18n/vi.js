@@ -81,7 +81,8 @@ export default {
     pending: "Chờ thanh toán",
     allowed: "Cho phép",
     unallowed: "Không cho phép",
-    charge: "Tính phí"
+    charge: "Tính phí",
+    total_price: "Tông chi phí"
   },
   places: {
     hanoi: "Hà Nội",

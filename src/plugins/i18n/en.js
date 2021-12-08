@@ -80,7 +80,8 @@ export default {
     pending: "Pending",
     allowed: "Allowed",
     unallowed: "Unallowed",
-    charge: "Charge"
+    charge: "Charge",
+    total_price: "Total price"
   },
   places: {
     hanoi: "Hanoi",

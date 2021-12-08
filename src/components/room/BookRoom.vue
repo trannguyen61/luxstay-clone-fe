@@ -163,6 +163,8 @@ export default {
 
     function bookRoom() {
       if (!isLoggedIn.value) {
+        if (localStorage.getItem('token') != "") store.commit('changeToken', localStorage.getItem('token'))
+
         ElNotification({
           title: "Please log in first",
           message: "",
