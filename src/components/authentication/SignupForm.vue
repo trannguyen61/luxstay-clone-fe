@@ -144,7 +144,6 @@ export default {
     const router = useRouter();
 
     const signUp = async () => {
-      console.log(phoneNumber.number)
       const reqBody = {
         "name": first_name.value + last_name.value,
         "email": email.value,

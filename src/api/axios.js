@@ -12,9 +12,6 @@ axiosInstance.interceptors.request.use(function (config) {
     const token = store.state.token || localStorage.getItem('token');
     config.headers.Authorization = token;
 
-    console.log(store, store.state)
-
-    console.log(config)
     return config;
   }, function (error) {
     // Do something with request error

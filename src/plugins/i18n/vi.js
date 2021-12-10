@@ -157,7 +157,10 @@ export default {
       num_of_workday: "Số ngày thường",
       num_of_weekend: "Số ngày cuối tuần",
       write_your_review: "Viết cảm nhận của bạn về địa điểm này",
-      post_review: "Đăng bình luận"
+      post_review: "Đăng bình luận",
+      apply_coupon: "Áp dụng",
+      coupon: "Mã giảm giá",
+      discount: "Giảm giá"
     },
     book: {
       book_info: "Thông tin đặt chỗ",

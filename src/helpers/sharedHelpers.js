@@ -51,8 +51,10 @@ export function convertDate(date, format = "YYYY-mm-dd") {
 export function getBusinessDatesCount(startDate, endDate) {
   let count = 0;
   let curDate = new Date(startDate.getTime());
+  console.log(curDate)
   while (curDate <= endDate) {
       const dayOfWeek = curDate.getDay();
+      console.log(dayOfWeek)
       if(dayOfWeek !== 0 && dayOfWeek !== 6) count++;
       curDate.setDate(curDate.getDate() + 1);
   }

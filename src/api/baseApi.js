@@ -22,3 +22,6 @@ export const BOOKMARK = '/bookmark'
 export const GET_CHECK_BOOKMARK = BOOKMARK + '/check'
 export const POST_NEW_BOOKMARK = BOOKMARK + '/new'
 export const DELETE_BOOKMARK = BOOKMARK + '/remove'
+
+export const COUPON = '/coupon'
+export const POST_APPLY_COUPON = COUPON + '/apply'

@@ -38,7 +38,6 @@ export default {
     let roomId = computed(() => route.query.roomId)
 
     onMounted(() => {
-      console.log(currentRoom.value);
       if (!currentRoom.value.name && !roomId.value) {
         router.push({
           name: "Home",
@@ -74,9 +73,9 @@ export default {
                               type: "success",
                             });
 
-                            router.push({
-                              name: "Home",
-                            });
+                            // router.push({
+                            //   name: "Home",
+                            // });
                           })
                           .setOnFinally(() => {})
       

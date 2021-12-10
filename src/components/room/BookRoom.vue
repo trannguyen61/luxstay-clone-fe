@@ -144,7 +144,7 @@ export default {
           (1000*60*60*24)
       ) + 1
       const workDays = getBusinessDatesCount(new Date(dateRangeSearch.value[0]), new Date(dateRangeSearch.value[1]))
-      console.log(totalDays, workDays, defaultDayPrice, defaultWeekendPrice)
+
       return {
         totalDays,
         workDays,

@@ -155,7 +155,10 @@ export default {
       num_of_workday: "Number of workdays",
       num_of_weekend: "Number of weekend days",
       write_your_review: "Write your review",
-      post_review: "Post your review"
+      post_review: "Post your review",
+      apply_coupon: "Apply",
+      coupon: "Coupon",
+      discount: "Discount"
     },
     book: {
       book_info: "Booking information",

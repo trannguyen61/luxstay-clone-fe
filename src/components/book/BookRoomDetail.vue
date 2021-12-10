@@ -19,7 +19,7 @@
 
     <div>
       <span>
-        <strong><small>{{ dateDiff }} {{ $t("shared.night") }}</small></strong>
+        <strong><small>{{ dateDiff + 1 }} {{ $t("shared.night") }}</small></strong>
         <span> ・ </span>
         <small class="m-0">{{ convertDate(checkin) }} - {{ convertDate(checkout) }}</small>
       </span>
@@ -39,6 +39,11 @@
         <small class="m-0">{{ detailPrice.totalPrice }} {{ $t("shared.currency." + currency) }}</small>
       </div>
 
+      <div class="d-flex justify-content-between mt-1" v-if="discount">
+        <small class="m-0">{{ $t("pages.room.discount") }}</small>
+        <small class="m-0">{{ discount }} %</small>
+      </div>
+
       <!-- <div class="d-flex justify-content-between">
         <small class="m-0">{{ $t("pages.room.service_price") }}</small>
         <small class="m-0">{{  }}</small>
@@ -49,7 +54,7 @@
 
     <div class="d-flex justify-content-between">
       <small class="m-0"><strong>{{ $t("pages.room.total") }}</strong></small>
-      <small class="m-0">{{ detailPrice.totalPrice }} {{ $t("shared.currency." + currency) }}</small>
+      <small class="m-0">{{ detailPrice.totalPriceAfterDiscount }} {{ $t("shared.currency." + currency) }}</small>
     </div>
 
     <el-divider></el-divider>
@@ -93,21 +98,29 @@ export default {
       roomId
     } = useBookRouteQuery();
 
+    let discount = computed(() => store.state.payment.coupon)
+
     let detailPrice = computed(() => {
       if (!store.state.currentRoom.name) return {}
 
-      console.log(store.state.currentRoom)
       const defaultDayPrice = store.state.currentRoom.schedule_price_attributes.normal_day_price
       const defaultWeekendPrice = store.state.currentRoom.schedule_price_attributes.weekend_price
 
-      const totalDays = dateDiff.value
-      const workDays = getBusinessDatesCount(new Date(checkin), new Date(checkout))
-      console.log(totalDays, workDays, defaultDayPrice, defaultWeekendPrice)
+      const totalDays = dateDiff.value + 1
+      const workDays = getBusinessDatesCount(new Date(checkin.value), new Date(checkout.value))
+      console.log(checkin.value, (new Date(checkin.value).getTime()))
+
+      const totalPrice = workDays * defaultDayPrice + (totalDays - workDays) * defaultWeekendPrice
+      const totalPriceAfterDiscount = Math.round((totalPrice - totalPrice * discount.value / 100) * 100) / 100
+
+      console.log(totalDays, workDays, totalDays - workDays, totalPrice)
+
       return {
         totalDays,
         workDays,
         weekendDays: totalDays - workDays,
-        totalPrice: workDays * defaultDayPrice + (totalDays - workDays) * defaultWeekendPrice
+        totalPrice,
+        totalPriceAfterDiscount
       }
     })
 
@@ -124,7 +137,8 @@ export default {
       kidGuests,
       babyGuests,
       convertDate,
-      detailPrice
+      detailPrice,
+      discount
     };
   },
 };

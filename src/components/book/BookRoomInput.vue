@@ -109,7 +109,21 @@
       </el-select>
     </div>
 
-    <el-button class="el-button--active mt-3" @click="onBookRoom">
+    <div class="mb-2">
+      <label class="required mb-2">{{ $t("pages.room.coupon") }}</label>
+      <el-input
+        v-model="coupon_code"
+        class="mt-2"
+      />
+      <div>
+        <small v-if="notifCoupon != ''" :class="couponErr ? 'text-danger' : 'text-success'">{{ notifCoupon }}</small>
+      </div>
+      <el-button class="el-button--active mt-3" size="small" @click="onApplyCoupon">
+        {{ $t("pages.room.apply_coupon") }}
+      </el-button>
+    </div>
+
+    <el-button class="mt-6" @click="onBookRoom">
       {{ $t("pages.room.book_now") }}
     </el-button>
   </div>
@@ -122,6 +136,10 @@ import { useStore } from "vuex";
 import useBookRouteQuery from "@/composables/useBookRouteQuery";
 
 import { COUNTRIES, COUNTRY_PHONE_CODE } from "@/consts/sharedConsts";
+
+import bookApi from '@/api/services/bookApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
 
 export default {
   props: {
@@ -141,6 +159,7 @@ export default {
     });
     let email = ref("");
     let country = ref("");
+    let coupon_code = ref("")
 
     function onBookRoom() {
       const reqBody = {
@@ -148,9 +167,39 @@ export default {
         "end_date": checkout.value,
         "num_of_people": totalGuests.value,
         "place_id": roomId.value,
-        "coupon_code": ""
+        "coupon_code": coupon_code.value
       }
       props.bookRoom(reqBody)
+    }
+
+    let notifCoupon = ref("")
+    let couponErr = ref("false")
+
+    async function onApplyCoupon() {
+      const reqBody = {
+        "code_name": coupon_code.value
+      }
+
+      const handler = new ApiHandler()
+                          .setData(reqBody)
+                          .setOnResponse(rawData => {
+                            if (rawData.status == 200) {
+                              notifCoupon.value = "Success! Price is reduced by " + rawData.data.discount + "%"
+                              couponErr.value = false
+                              store.commit('changeCoupon', rawData.data.discount)
+                            }
+                          })
+                          .setOnError(() => {
+                            notifCoupon.value = "Oh no! Coupon doesn't exist or is used up"
+                            couponErr.value = true
+                          })
+                          .setOnFinally(() => {})
+      
+      const onRequest = async () => {
+        return bookApi.postApplyCoupon(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
     }
 
     let {
@@ -172,6 +221,7 @@ export default {
       phoneNumber,
       email,
       country,
+      coupon_code,
       currentRoomName,
       totalGuestsText,
       checkin,
@@ -180,6 +230,9 @@ export default {
       grownupGuests,
       kidGuests,
       babyGuests,
+      notifCoupon,
+      couponErr,
+      onApplyCoupon,
       onBookRoom,
       COUNTRIES,
       COUNTRY_PHONE_CODE,

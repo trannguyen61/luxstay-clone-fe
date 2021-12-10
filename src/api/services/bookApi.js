@@ -1,6 +1,6 @@
 import { axiosInstance } from '../axios'
 
-import { POST_NEW_BOOKING, GET_BOOKING_BY_USER } from '../baseApi'
+import { POST_NEW_BOOKING, GET_BOOKING_BY_USER, POST_APPLY_COUPON } from '../baseApi'
 
 export default {
     postNewBooking(reqBody) {
@@ -8,5 +8,8 @@ export default {
     },
     getBookingByUser({ id }) {
         return axiosInstance.get(`${GET_BOOKING_BY_USER}/${id}`)
+    },
+    postApplyCoupon(reqBody) {
+        return axiosInstance.post(POST_APPLY_COUPON, reqBody)
     }
 }

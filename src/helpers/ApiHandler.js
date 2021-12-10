@@ -42,8 +42,8 @@ class ApiHandler {
 
   notifyError(err) {
     ElNotification({
-      title: err.name,
-      message: err.message,
+      title: "Oops!",
+      message: err.response.data.error || err.message,
       type: "error",
     });
   }
@@ -55,7 +55,7 @@ class ApiHandler {
       this.onResponse(data);
     } catch (err) {
       this.notifyError(err);
-      this.onError();
+      this.onError(err);
     } finally {
       this.onFinally();
     }
