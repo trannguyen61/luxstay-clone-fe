@@ -71,6 +71,7 @@ export default {
     const signout = () => {
       store.commit('changeToken', '')
       store.commit('changeUser', '')
+      console.log(store.getters.isLoggedIn)
     };
 
     return {

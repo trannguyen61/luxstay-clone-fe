@@ -45,6 +45,25 @@
         ></book-room>
       </el-col>
     </el-row>
+    <div class="container container--sm mx-auto" v-if="isLoggedIn">
+      <div class="section-title mb-3">
+        <el-row :gutter="10" class="d-flex align-items-center">
+          <el-col :md="12">
+            <h3 class="m-0">{{ $t("shared.recommend") }}</h3>
+          </el-col>
+        </el-row>
+      </div>
+
+      <div class="row">
+        <div
+          v-for="item in recommendedList"
+          :key="item.id"
+          class="col-xs-6 col-md-3 col-lg-20"
+        >
+          <room-preview :item="item" :currency="detailedRoom.policy_attributes.currency" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -63,6 +82,7 @@ import RoomReview from "@/components/room/RoomReview.vue";
 import RoomRepayRules from "@/components/room/RoomRepayRules.vue";
 import RoomMap from "@/components/room/RoomMap.vue";
 import BookRoom from "@/components/room/BookRoom.vue";
+import RoomPreview from "@/components/search/RoomPreview.vue";
 
 import {
   IMAGES_SLICK_ARRAY,
@@ -88,6 +108,7 @@ export default {
     RoomRepayRules,
     RoomMap,
     BookRoom,
+    RoomPreview
   },
 
   setup() {
@@ -237,10 +258,33 @@ export default {
       await handler.setOnRequest(onRequest).execute()
     }
 
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+    let recommendedList = ref([])
+
+    async function onGetRecommendByPlace() {
+      const handler = new ApiHandler()
+                          .setData({id: roomId})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            recommendedList.value = data.data
+                          })
+                          .setOnFinally(() => {})
+
+      const onRequest = async () => {
+        return placeApi.getRecommendByPlace(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     onMounted(() => {
       onGetPlaceById()
       onGetPlaceRatings()
-      onGetCheckBookmark()
+
+      if (isLoggedIn.value) {
+        onGetCheckBookmark()
+        onGetRecommendByPlace()
+      }
     })
 
     return {
@@ -257,7 +301,9 @@ export default {
       ROOM_AVAILABILITY,
       ROOM_DETAIL_PRICED,
       ROOM_REVIEW,
-      bookRoom
+      bookRoom,
+      isLoggedIn,
+      recommendedList
     };
   },
 };

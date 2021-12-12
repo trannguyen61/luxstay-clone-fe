@@ -83,7 +83,8 @@ export default {
     charge: "Charge",
     total_price: "Total price",
     bookmark: "Bookmark",
-    rmv_bookmark: "Delete bookmark"
+    rmv_bookmark: "Delete bookmark",
+    recommend: "Recommend rooms"
   },
   places: {
     hanoi: "Hanoi",
@@ -220,5 +221,8 @@ export default {
   errors: {
     not_valid_email: "Not valid email format.",
     not_valid_password: "Password must be longer than 6 characters."
+  },
+  request: {
+    login: "You need to login first"
   }
 };

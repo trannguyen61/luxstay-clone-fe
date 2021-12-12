@@ -6,7 +6,7 @@ export default {
     },
     getters: {
         isLoggedIn(state) {
-            return state.token != '' || localStorage.getItem('token') != ""
+            return state.token != ''
         }
     },
     mutations: {

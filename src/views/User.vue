@@ -16,11 +16,13 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import { useRoute } from 'vue-router'
+import { ref, onMounted, computed, watch } from "vue";
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from "vuex";
 
 import MyBookedList from "@/components/user/MyBookedList";
 import MyBookmark from "@/components/user/MyBookmark"
+import { ElNotification } from "element-plus";
 
 export default {
   components: { MyBookedList, MyBookmark },
@@ -30,8 +32,31 @@ export default {
     let activeName = ref("first");
 
     const handleClickTab = (tab, event) => {};
+
+    const store = useStore();
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+
+    const router = useRouter()
+
+    function redirectUnauthorizedUser() {
+      if (!isLoggedIn.value) {
+        ElNotification({
+          title: "Oops!",
+          message: "You must log in first",
+          type: "warning",
+        });
+
+        router.push({ name: "Home" })
+      }
+    }
+
+    watch(() => isLoggedIn.value, () => {
+      redirectUnauthorizedUser()
+    })
     
     onMounted(() => {
+      redirectUnauthorizedUser()
+
       if (route.query.tab == 'bookmark') {
         activeName.value = 'second'
       }

@@ -84,7 +84,8 @@ export default {
     charge: "Tính phí",
     total_price: "Tông chi phí",
     bookmark: "Yêu thích",
-    rmv_bookmark: "Bỏ yêu thích"
+    rmv_bookmark: "Bỏ yêu thích",
+    recommend: "Phòng gợi ý"
   },
   places: {
     hanoi: "Hà Nội",
@@ -222,5 +223,8 @@ export default {
   errors: {
     not_valid_email: "Không đúng định dạng email.",
     not_valid_password: "Mật khẩu cần dài hơn 6 ký tự."
+  },
+  request: {
+    login: "Bạn cần đăng nhập để truy cập trang này"
   }
 };

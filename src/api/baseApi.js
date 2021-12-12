@@ -25,3 +25,6 @@ export const DELETE_BOOKMARK = BOOKMARK + '/remove'
 
 export const COUPON = '/coupon'
 export const POST_APPLY_COUPON = COUPON + '/apply'
+
+export const RECOMMENDER = '/recommender'
+export const GET_RECOMMEND_BY_CITY = RECOMMENDER + '/city'

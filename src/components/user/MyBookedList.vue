@@ -52,7 +52,7 @@
         <div v-else class="my-booked-list--list">
           <el-row :gutter="20">
             <el-col v-for="(item, i) in list" :key="i" :span="24" :md="12" >
-              <booked-room-item :item="item" />
+              <booked-room-item :item="item" class="mb-2" />
             </el-col>
           </el-row>
         </div>

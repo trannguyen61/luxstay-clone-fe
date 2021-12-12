@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useStore } from "vuex";
 import { convertDate } from "@/helpers/sharedHelpers"
 
@@ -76,18 +76,24 @@ export default {
     const store = useStore()
     let bookedList = computed(() => store.state.user.bookedList)
     let userId = computed(() => store.state.user.user.id)
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
 
     let ableToWriteAReview = computed(() => {
-      if (!bookedList.value.length) {
+      if (!bookedList.value.length && isLoggedIn.value) {
         getBookedRoomList()
         return
       }
 
-      return bookedList.value.map(e => e.place_id).includes(props.roomId)
+      return isLoggedIn.value && bookedList.value.map(e => e.place_id).includes(props.roomId)
+    })
+
+    watch(() => isLoggedIn, () => {
+      getBookedRoomList()
     })
 
     onMounted(() => {
-      if (!bookedList.value.length) {
+      console.log(bookedList.value)
+      if (!bookedList.value.length && isLoggedIn.value) {
         getBookedRoomList()
       }
     })

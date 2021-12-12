@@ -31,6 +31,26 @@
       </router-link>
     </slick-carousel>
 
+    <template v-if="isLoggedIn">
+      <div class="section-title mb-3">
+        <el-row :gutter="10" class="d-flex align-items-center">
+          <el-col :md="12">
+            <h3 class="m-0">{{ $t("shared.recommend") }}</h3>
+          </el-col>
+        </el-row>
+      </div>
+
+      <div class="row">
+        <div
+          v-for="item in recommendedList"
+          :key="item.id"
+          class="col-xs-6 col-md-3 col-lg-20"
+        >
+          <room-preview :item="item" :currency="currency" />
+        </div>
+      </div>
+    </template>
+
     <div class="section-title mb-3">
       <el-row :gutter="10" class="d-flex align-items-center">
         <el-col :md="12">
@@ -171,6 +191,25 @@ export default {
       await handler.setOnRequest(onRequest).execute()
     }
 
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+    let recommendedList = ref([])
+
+    async function onGetRecommendByCity() {
+      const handler = new ApiHandler()
+                          .setData({city: place.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            recommendedList.value = data.data
+                          })
+                          .setOnFinally(() => {})
+
+      const onRequest = async () => {
+        return placeApi.getRecommendByCity(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     function onNextPage() {
       if (page.value == totalPage.value) return
 
@@ -193,6 +232,10 @@ export default {
     onMounted(() => {
       onGetTotalNumberOfPlaceInCity()
       onGetPlaceByCity()
+
+      if (isLoggedIn.value) {
+        onGetRecommendByCity()
+      }
     })
 
     return {
@@ -206,6 +249,8 @@ export default {
       onNextPage,
       onPrevPage,
       changePage,
+      isLoggedIn,
+      recommendedList,
       INTERESTING_PLACES,
       FILTER_OPTIONS,
       ROOM_PREVIEW_LIST,
