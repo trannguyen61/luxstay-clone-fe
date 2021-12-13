@@ -67,8 +67,6 @@ import { i18n } from "@/plugins/i18n/i18n";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-import { BOOKED_ROOM } from "@/test/testData";
-
 import BookedRoomItem from "@/components/user/BookedRoomItem";
 import bookApi from '@/api/services/bookApi.js'
 import ApiHandler from '@/helpers/ApiHandler'

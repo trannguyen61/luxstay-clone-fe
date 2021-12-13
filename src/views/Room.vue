@@ -85,11 +85,7 @@ import BookRoom from "@/components/room/BookRoom.vue";
 import RoomPreview from "@/components/search/RoomPreview.vue";
 
 import {
-  IMAGES_SLICK_ARRAY,
   DETAILED_ROOM,
-  ROOM_AVAILABILITY,
-  ROOM_DETAIL_PRICED,
-  ROOM_REVIEW
 } from "@/test/testData.js";
 
 import placeApi from '@/api/services/placeApi.js'
@@ -296,11 +292,7 @@ export default {
       isBookmarked,
       onPostNewBookmark,
       onDeleteBookmark,
-      IMAGES_SLICK_ARRAY,
       DETAILED_ROOM,
-      ROOM_AVAILABILITY,
-      ROOM_DETAIL_PRICED,
-      ROOM_REVIEW,
       bookRoom,
       isLoggedIn,
       recommendedList

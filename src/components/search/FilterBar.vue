@@ -1,18 +1,18 @@
 <template>
   <div class="filter-bar container--md">
-    <el-checkbox-button
+    <!-- <el-checkbox-button
       v-for="option in DETAIL_FILTER_OPTIONS"
       :key="option.label"
       v-model="inputs[option.value].value"
       :label="$t(`shared.options.${option.label}`)"
       class="ml-1 mr-1"
-    ></el-checkbox-button>
+    ></el-checkbox-button> -->
 
-    <checkbox-filter
+    <!-- <checkbox-filter
       :array="HANOI_DISTRICTS"
       type="place"
       @choose-filters="getPlaces"
-    ></checkbox-filter>
+    ></checkbox-filter> -->
     <checkbox-filter
       :array="ROOM_TYPES"
       type="type"
@@ -29,14 +29,14 @@ import { useStore } from "vuex";
 
 import { DETAIL_FILTER_OPTIONS } from "@/consts/sharedConsts.js";
 
-import CheckboxFilter from "@/components/search/CheckboxFilter.vue";
+// import CheckboxFilter from "@/components/search/CheckboxFilter.vue";
 import PriceFilter from "@/components/search/PriceFilter.vue"
 import GeneralFilter from "@/components/search/GeneralFilter.vue"
 
-import { HANOI_DISTRICTS, ROOM_TYPES } from "@/test/testData.js";
+import { ROOM_TYPES } from "@/test/testData.js";
 
 export default {
-  components: { CheckboxFilter, PriceFilter, GeneralFilter },
+  components: { PriceFilter, GeneralFilter },
 
   setup() {
     const store = useStore();
@@ -85,7 +85,7 @@ export default {
       getPriceRange,
       getGeneralFilters,
       DETAIL_FILTER_OPTIONS,
-      HANOI_DISTRICTS,
+      // HANOI_DISTRICTS,
       ROOM_TYPES,
     };
   },

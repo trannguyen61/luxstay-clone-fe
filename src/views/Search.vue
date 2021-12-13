@@ -17,7 +17,7 @@
       <router-link
         v-for="item in INTERESTING_PLACES"
         :key="item.name"
-        to="#"
+        :to="{ name: 'Search', query: { place: item.link } }"
         class="place-link"
       >
         <div class="p-relative h-100">
@@ -119,8 +119,6 @@ import {
   isLgOrAboveScreen,
   isSmOrAboveScreen,
 } from "@/helpers/mediaHelpers.js";
-
-import { ROOM_PREVIEW_LIST } from "@/test/testData.js";
 
 import placeApi from '@/api/services/placeApi.js'
 import ApiHandler from '@/helpers/ApiHandler'
@@ -253,7 +251,6 @@ export default {
       recommendedList,
       INTERESTING_PLACES,
       FILTER_OPTIONS,
-      ROOM_PREVIEW_LIST,
       PAGINATION_SIZE,
     };
   },
