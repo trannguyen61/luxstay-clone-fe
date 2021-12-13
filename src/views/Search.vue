@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -156,6 +156,18 @@ export default {
 
     let page = ref(1)
     let place = ref(route.query.place)
+
+    watch(() => route.query.place, () => {
+      place.value = route.query.place
+      if (!place.value) return
+
+      onGetTotalNumberOfPlaceInCity()
+      onGetPlaceByCity()
+
+      if (isLoggedIn.value) {
+        onGetRecommendByCity()
+      }
+    })
 
     async function onGetTotalNumberOfPlaceInCity() {
       const handler = new ApiHandler()

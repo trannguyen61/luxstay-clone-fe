@@ -10,15 +10,15 @@
       </el-carousel-item>
     </el-carousel>
 
-    <div class="section-title">
+    <div class="section-title" v-if="!isLoggedIn">
       <h2 class="m-0 mb-3">{{ $t("pages.home.greetings") }}</h2>
       <p class="m-0 mb-2">{{ $t("pages.home.greetings_info_1") }}</p>
       <p class="m-0">
-        <router-link class="link text-bold" to="#">{{
+        <router-link class="link text-bold" :to="{ name: 'Login' }">{{
           $t("shared.login")
         }}</router-link>
         {{ $t("shared.or") }}
-        <router-link class="link text-bold" to="#">{{
+        <router-link class="link text-bold" :to="{ name: 'Signup' }">{{
           $t("shared.signup")
         }}</router-link>
         {{ $t("pages.home.greetings_info_2") }}
@@ -59,6 +59,7 @@
 
 <script>
 import { computed } from "vue";
+import { useStore } from "vuex";
 
 // @ is an alias to /src
 import SlickCarousel from "@/components/shared/SlickCarousel.vue";
@@ -90,11 +91,15 @@ export default {
 
     let checkIsMdOrAboveScreen = computed(() => isMdOrAboveScreen(window));
 
+    const store = useStore();
+    let isLoggedIn = computed(() => store.getters.isLoggedIn)
+
     return {
       placeSlickItemNumber,
       checkIsMdOrAboveScreen,
       BANNER_FILENAMES,
       INTERESTING_PLACES,
+      isLoggedIn
     };
   },
 };

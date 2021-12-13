@@ -28,6 +28,9 @@
     <router-link to="#">
       <div class="room-preview--title">{{ item.name }}</div>
     </router-link>
+    <div>
+      <small>{{ item.address }}</small>
+    </div>
     <strong class="room-preview--price">
       <small
         >{{

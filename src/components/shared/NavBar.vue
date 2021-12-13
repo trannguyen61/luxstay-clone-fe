@@ -1,7 +1,11 @@
 <template>
   <div class="navbar">
-    <div class="navbar--search">
-      <div class="navbar--logo"></div>
+    <div class="navbar--search d-flex align-items-center">
+      <div class="navbar--logo mr-3">
+        <router-link :to="{ name: 'Home' }">
+          <img :src="require('@/assets/images/wallet@2x.png')" width="30" height="35">
+        </router-link>
+      </div>
       <div class="searchbar">
         <el-input
           v-model="locationSearch"

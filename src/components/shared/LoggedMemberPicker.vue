@@ -7,7 +7,7 @@
       class="setting-picker-btn d-flex align-items-center"
       @click="toggleDialog"
     >
-      <b class="m-0">{{ "Tran Nguyen" }}</b>
+      <b class="m-0">{{ user.name }}</b>
       <i class="el-icon-arrow-down ml-1 mr-1"></i>
     </div>
     <transition name="slide-fade" mode="out-in">
@@ -73,6 +73,7 @@ export default {
       store.commit('changeUser', '')
       console.log(store.getters.isLoggedIn)
     };
+    let user = computed(() => store.state.user.user)
 
     return {
       items,
@@ -80,6 +81,7 @@ export default {
       toggleDialog,
       checkIsMdOrAboveScreen,
       signout,
+      user
     };
   },
 };
