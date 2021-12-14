@@ -118,11 +118,11 @@ export default {
     let user = computed(() => store.state.user.user)
 
     onMounted(() => {
-      if (!isLoggedIn.value && !localStorage.getItem('token')) {
+      if (!isLoggedIn.value && localStorage.getItem('token')) {
         store.commit('changeToken', localStorage.getItem('token'))
       }
 
-      if (!user.value.id && !localStorage.getItem('user')) {
+      if (!user.value.id && localStorage.getItem('user')) {
         store.commit('changeUser', JSON.parse(localStorage.getItem('user')))
       }
     })
