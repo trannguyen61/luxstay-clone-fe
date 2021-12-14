@@ -73,9 +73,9 @@ export default {
                               type: "success",
                             });
 
-                            // router.push({
-                            //   name: "Home",
-                            // });
+                            router.push({
+                              name: "Home",
+                            });
                           })
                           .setOnFinally(() => {})
       
