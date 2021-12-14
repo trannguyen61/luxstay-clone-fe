@@ -1,6 +1,6 @@
 <template>
   <div class="container container--md search">
-    <filter-bar></filter-bar>
+    <filter-bar @update-list="updateList"></filter-bar>
     
     <div class="section-title">
       <h3 class="m-0 mb-3">{{ $t("pages.search.places") }}</h3>
@@ -78,6 +78,12 @@
       </el-row>
     </div>
 
+    <el-empty
+      v-if="!roomList.length"
+      :image-size="200"
+      :description="$t('shared.no_data')"
+    ></el-empty>
+
     <div class="row">
       <div
         v-for="item in roomList"
@@ -93,7 +99,7 @@
         layout="prev, pager, next"
         :page-size="PAGINATION_SIZE"
         :total="totalPage"
-        :current-page="page.value"
+        :current-page="page"
         class="d-inline-block"
         @next-click="onNextPage"
         @prev-click="onPrevPage"
@@ -161,12 +167,23 @@ export default {
       place.value = route.query.place
       if (!place.value) return
 
+      page.value = 1
       onGetTotalNumberOfPlaceInCity()
       onGetPlaceByCity()
 
       if (isLoggedIn.value) {
         onGetRecommendByCity()
       }
+    })
+
+    let locationSearch = ref(route.query.l)
+
+    watch(() => route.query.l, () => {
+      locationSearch.value = route.query.l
+      if (!locationSearch.value) return
+
+      page.value = 1
+      onGetSearchByNameOrAdd()
     })
 
     async function onGetTotalNumberOfPlaceInCity() {
@@ -201,6 +218,23 @@ export default {
       await handler.setOnRequest(onRequest).execute()
     }
 
+    async function onGetSearchByNameOrAdd() {
+      const handler = new ApiHandler()
+                          .setData({search: locationSearch.value, page: page.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            roomList.value = data.data.data
+                            totalPage.value = Math.ceil(data.data.count / 20)
+                          })
+                          .setOnFinally(() => {})
+
+      const onRequest = async () => {
+        return placeApi.getSearchByNameOrAdd(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     let isLoggedIn = computed(() => store.getters.isLoggedIn)
     let recommendedList = ref([])
 
@@ -224,29 +258,46 @@ export default {
       if (page.value == totalPage.value) return
 
       page.value = page.value + 1
-      onGetPlaceByCity()
+      searchPlaces()
     }
 
     function onPrevPage() {
       if (page.value == 1) return
 
       page.value = page.value - 1
-      onGetPlaceByCity()
+      searchPlaces()
     }
     
     function changePage(data) {
       page.value = data
-      onGetPlaceByCity()
+      searchPlaces()
+    }
+
+    function searchPlaces() {
+      if (place.value) {
+        onGetPlaceByCity()
+      } else if (locationSearch.value) {
+        onGetSearchByNameOrAdd()
+      }
     }
 
     onMounted(() => {
-      onGetTotalNumberOfPlaceInCity()
-      onGetPlaceByCity()
+      if (place.value) {
+        onGetTotalNumberOfPlaceInCity()
+        onGetPlaceByCity()
 
-      if (isLoggedIn.value) {
-        onGetRecommendByCity()
+        if (isLoggedIn.value) {
+          onGetRecommendByCity()
+        }
+      } else if (locationSearch.value) {
+        onGetSearchByNameOrAdd()
       }
     })
+
+    function updateList(list) {
+      roomList.value = list.data
+      totalPage.value = list.count
+    }
 
     return {
       currency,
@@ -259,6 +310,7 @@ export default {
       onNextPage,
       onPrevPage,
       changePage,
+      updateList,
       isLoggedIn,
       recommendedList,
       INTERESTING_PLACES,

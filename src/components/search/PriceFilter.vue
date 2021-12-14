@@ -4,7 +4,6 @@
     :width="400"
     trigger="click"
     popper-class="custom-popover"
-    @hide="done"
   >
     <template #reference>
       <el-button :class="choseFilters ? 'el-button--active' : ''">
@@ -24,8 +23,8 @@
         class="price-slider"
         v-model="priceRange"
         range
-        :max="50000000"
-        :step="100000"
+        :max="100"
+        :step="5"
       />
       <div class="d-flex align-items-center">
         <div class="price-change">
@@ -65,17 +64,19 @@ export default {
   emits: ["choose-filters"],
 
   setup(props, context) {
-    let priceRange = ref([0, 50000000]);
+    let priceRange = ref([0, 100]);
 
     function cancel() {
-      priceRange.value = [];
+      priceRange.value = [0, 100];
+
+      done()
     }
     function done() {
       context.emit("choose-filters", priceRange.value);
     }
 
     let choseFilters = computed(
-      () => priceRange.value[0] > 0 || priceRange.value[1] < 50000000
+      () => priceRange.value[0] > 0 || priceRange.value[1] < 100
     );
 
     let title = computed(() => {

@@ -28,3 +28,6 @@ export const POST_APPLY_COUPON = COUPON + '/apply'
 
 export const RECOMMENDER = '/recommender'
 export const GET_RECOMMEND_BY_CITY = RECOMMENDER + '/city'
+
+export const GET_SEARCH_BY_NAME_OR_ADD = PLACE + '/search'
+export const GET_FILTER = PLACE + '/filter'

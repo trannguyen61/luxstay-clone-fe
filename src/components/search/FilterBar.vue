@@ -35,10 +35,14 @@ import GeneralFilter from "@/components/search/GeneralFilter.vue"
 
 import { ROOM_TYPES } from "@/test/testData.js";
 
+import placeApi from '@/api/services/placeApi.js'
+import ApiHandler from '@/helpers/ApiHandler'
+import ResponseHelper from '@/helpers/ResponseHelper'
+
 export default {
   components: { PriceFilter, GeneralFilter },
 
-  setup() {
+  setup(_, context) {
     const store = useStore();
 
     let currency = computed(() => store.state.currency);
@@ -69,12 +73,46 @@ export default {
 
     function getPriceRange(array) {
       priceRange.value = array;
+
+      getFilter()
     }
 
     let generalFilterOptions = ref({});
 
     function getGeneralFilters(object) {
       generalFilterOptions.value = object;
+
+      getFilter()
+    }
+
+    async function getFilter() {
+      const params = {
+        ...(priceRange.value.length == 2
+          ? {
+              min_price: priceRange.value[0],
+              max_price: priceRange.value[1],
+            }
+          : {}),
+        ...(generalFilterOptions.value.bedNumber ? { num_of_bed: generalFilterOptions.value.bedNumber} : {}),
+        ...(generalFilterOptions.value.bedroomNumber ? { num_of_bedroom: generalFilterOptions.value.bedroomNumber} : {}),
+        ...(generalFilterOptions.value.bathroomNumber ? { num_of_bathroom: generalFilterOptions.value.bathroomNumber} : {}),
+      }
+
+      if (!Object.keys(params).length) return
+
+      const handler = new ApiHandler()
+                          .setData({params})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            context.emit('update-list', data.data)
+                          })
+                          .setOnFinally(() => {})
+
+      const onRequest = async () => {
+        return placeApi.getFilter(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
     }
 
     return {

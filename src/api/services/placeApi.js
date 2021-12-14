@@ -12,7 +12,9 @@ import {
   DELETE_BOOKMARK,
   BOOKMARK,
   RECOMMENDER,
-  GET_RECOMMEND_BY_CITY
+  GET_RECOMMEND_BY_CITY,
+  GET_SEARCH_BY_NAME_OR_ADD,
+  GET_FILTER
 } from "../baseApi";
 
 export default {
@@ -48,5 +50,12 @@ export default {
   },
   getRecommendByPlace({ id, num_rec = 5 }) {
     return axiosInstance.get(`${RECOMMENDER}/${id}`, { params: { num_rec } })
-  }
+  },
+  getSearchByNameOrAdd({ search, page }) {
+    return axiosInstance.get(`${GET_SEARCH_BY_NAME_OR_ADD}/${search}/${page}`)
+  },
+  getFilter({params, page = 1}) {
+    console.log(params)
+    return axiosInstance.get(`${GET_FILTER}/${page}`, { params: { ...params } })
+  },
 };

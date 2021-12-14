@@ -4,7 +4,6 @@
     :width="600"
     trigger="click"
     popper-class="custom-popover"
-    @hide="done"
   >
     <template #reference>
       <el-button :class="choseFilters ? 'el-button--active' : ''">
@@ -89,6 +88,8 @@ export default {
       bathroomNumber.value = 0;
       serviceList.value = [];
       shoppingList.value = [];
+
+      done()
     }
     function done() {
       context.emit("choose-filters", {
