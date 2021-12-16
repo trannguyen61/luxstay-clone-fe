@@ -1,5 +1,5 @@
 <template>
-  <div class="room-page">
+  <div class="room-page" v-loading.fullscreen.lock="loadRoom">
     <slick-slider
       :height="400"
       :imgArray="imageArray"
@@ -13,6 +13,7 @@
           :items="[{name: detailedRoom.address}]"
         ></place-breadcrumb>
         <room-description
+          :loadBookmark="loadBookmark"
           :room="detailedRoom"
           :isBookmarked="isBookmarked"
           :bookmark="onPostNewBookmark"
@@ -54,7 +55,7 @@
         </el-row>
       </div>
 
-      <div class="row">
+      <div class="row" v-loading="loadRecommendedRoom">
         <div
           v-for="item in recommendedList"
           :key="item.id"
@@ -68,7 +69,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
@@ -119,8 +120,25 @@ export default {
       lng: DETAILED_ROOM.address.data.longitude,
     }));
 
+    let loadRoom = ref(false)
+    let loadRecommendedRoom = ref(false)
+    let loadBookmark = ref(false)
+
     let detailedRoom = ref({})
-    const roomId = filterQuery.value.id
+    let roomId = filterQuery.value.id
+
+    watch(() => route.query.id, () => {
+      roomId = route.query.id
+      if (!roomId) return
+
+      onGetPlaceById()
+      onGetPlaceRatings()
+
+      if (isLoggedIn.value) {
+        onGetCheckBookmark()
+        onGetRecommendByPlace()
+      }
+    })
 
     let imageArray = ref([])
     function transformImageArray() {
@@ -128,6 +146,8 @@ export default {
     }
 
     async function onGetPlaceById() {
+      loadRoom.value = true
+
       const handler = new ApiHandler()
                           .setData({id: roomId})
                           .setOnResponse(rawData => {
@@ -135,7 +155,9 @@ export default {
                             detailedRoom.value = data.data
                             transformImageArray()
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadRoom.value = false
+                          })
       
       const onRequest = async () => {
         return placeApi.getPlaceById(handler.data)
@@ -189,6 +211,8 @@ export default {
     }
 
     async function onPostNewBookmark() {
+      loadBookmark.value = true
+
       const reqBody = {
         place_id: roomId
       }
@@ -212,7 +236,9 @@ export default {
                               });
                             }
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadBookmark.value = false
+                          })
       
       const onRequest = async () => {
         return placeApi.postNewBookmark(handler.data)
@@ -222,6 +248,8 @@ export default {
     }
 
     async function onDeleteBookmark() {
+      loadBookmark.value = true
+
       const reqBody = {
         place_id: roomId
       }
@@ -245,7 +273,9 @@ export default {
                               });
                             }
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadBookmark.value = false
+                          })
       
       const onRequest = async () => {
         return placeApi.deleteBookmark(handler.data)
@@ -258,13 +288,17 @@ export default {
     let recommendedList = ref([])
 
     async function onGetRecommendByPlace() {
+      loadRecommendedRoom.value = true
+
       const handler = new ApiHandler()
                           .setData({id: roomId})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             recommendedList.value = data.data
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadRecommendedRoom.value = false
+                          })
 
       const onRequest = async () => {
         return placeApi.getRecommendByPlace(handler.data)
@@ -295,7 +329,10 @@ export default {
       DETAILED_ROOM,
       bookRoom,
       isLoggedIn,
-      recommendedList
+      recommendedList,
+      loadRoom,
+      loadRecommendedRoom,
+      loadBookmark
     };
   },
 };

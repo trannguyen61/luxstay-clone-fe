@@ -3,14 +3,16 @@
     <h1>{{ room.name }}</h1>
 
     <div class="d-flex align-items-center">
-      <el-button type="danger" round v-if="!isBookmarked" @click="bookmark">
-        {{ $t("shared.bookmark") }}
-        <font-awesome-icon icon="heart" class="ml-1" />
-      </el-button>
-      <el-button round v-else @click="removeBookmark">
-        {{ $t("shared.rmv_bookmark") }}
-        <font-awesome-icon icon="heart" class="ml-1" />
-      </el-button>
+      <div v-loading="loadBookmark">
+        <el-button type="danger" round v-if="!isBookmarked" @click="bookmark">
+          {{ $t("shared.bookmark") }}
+          <font-awesome-icon icon="heart" class="ml-1" />
+        </el-button>
+        <el-button round v-else @click="removeBookmark">
+          {{ $t("shared.rmv_bookmark") }}
+          <font-awesome-icon icon="heart" class="ml-1" />
+        </el-button>
+      </div>
 
       <div class="room-page--host ml-3">
         <router-link to="/">
@@ -68,6 +70,10 @@ export default {
     removeBookmark: {
       type: Function,
       default: () => {}
+    },
+    loadBookmark: {
+      type: Boolean,
+      default: false
     }
   },
 

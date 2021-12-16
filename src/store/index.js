@@ -7,7 +7,7 @@ import { CURRENCIES_OBJ } from '../consts/billingConsts'
 
 export default createStore({
   state: {
-    currency: CURRENCIES_OBJ.vi.name,
+    currency: CURRENCIES_OBJ.en.name,
     currentRoom: {}
   },
   mutations: {

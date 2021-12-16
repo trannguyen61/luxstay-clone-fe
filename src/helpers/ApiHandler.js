@@ -43,7 +43,7 @@ class ApiHandler {
   notifyError(err) {
     ElNotification({
       title: "Oops!",
-      message: err.response.data.error || err.message,
+      message: err ? (err.response ? err.response.data.error : err.message) : "Please try again",
       type: "error",
     });
   }

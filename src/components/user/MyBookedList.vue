@@ -43,7 +43,7 @@
         ></el-tab-pane>
       </el-tabs>
 
-      <div>
+      <div v-loading="loadBookedList">
         <el-empty
           v-if="!list.length"
           :image-size="200"
@@ -80,6 +80,8 @@ export default {
     let monthRange = ref([]);
     let activeName = ref("first");
 
+    let loadBookedList = ref(false)
+
     let list = ref([]);
 
     const handleClickTab = () => {};
@@ -115,6 +117,8 @@ export default {
         return
       }
 
+      loadBookedList.value = true
+
       const handler = new ApiHandler()
                           .setData({id: userId.value})
                           .setOnResponse(rawData => {
@@ -122,7 +126,9 @@ export default {
                             list.value = data.data
                             store.commit('changeBookedList', data.data)
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadBookedList.value = false
+                          })
       
       const onRequest = async () => {
         return bookApi.getBookingByUser(handler.data)
@@ -153,6 +159,7 @@ export default {
       list,
       handleClickTab,
       bookTypes,
+      loadBookedList
     };
   },
 };

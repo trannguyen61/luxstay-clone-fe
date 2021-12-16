@@ -42,7 +42,18 @@ import ResponseHelper from '@/helpers/ResponseHelper'
 export default {
   components: { PriceFilter, GeneralFilter },
 
-  setup(_, context) {
+  props: {
+    city: {
+      type: String,
+      required: true
+    },
+    page: {
+      type: Number,
+      default: 1
+    }
+  },
+
+  setup(props, context) {
     const store = useStore();
 
     let currency = computed(() => store.state.currency);
@@ -101,7 +112,7 @@ export default {
       if (!Object.keys(params).length) return
 
       const handler = new ApiHandler()
-                          .setData({params})
+                          .setData({params, page: props.page, city: props.city})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             context.emit('update-list', data.data)

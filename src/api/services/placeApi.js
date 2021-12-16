@@ -54,8 +54,7 @@ export default {
   getSearchByNameOrAdd({ search, page }) {
     return axiosInstance.get(`${GET_SEARCH_BY_NAME_OR_ADD}/${search}/${page}`)
   },
-  getFilter({params, page = 1}) {
-    console.log(params)
-    return axiosInstance.get(`${GET_FILTER}/${page}`, { params: { ...params } })
+  getFilter({params, city, page = 1}) {
+    return axiosInstance.get(`${GET_FILTER}/${city}/${page}`, { params: { ...params } })
   },
 };

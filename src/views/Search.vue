@@ -1,6 +1,10 @@
 <template>
   <div class="container container--md search">
-    <filter-bar @update-list="updateList"></filter-bar>
+    <filter-bar
+      :city="place"
+      :page="page"
+      @update-list="updateList">
+    </filter-bar>
     
     <div class="section-title">
       <h3 class="m-0 mb-3">{{ $t("pages.search.places") }}</h3>
@@ -40,7 +44,7 @@
         </el-row>
       </div>
 
-      <div class="row">
+      <div class="row" v-loading="loadRecommendedRoom">
         <div
           v-for="item in recommendedList"
           :key="item.id"
@@ -84,7 +88,7 @@
       :description="$t('shared.no_data')"
     ></el-empty>
 
-    <div class="row">
+    <div class="row" v-loading="loadRoom">
       <div
         v-for="item in roomList"
         :key="item.id"
@@ -160,6 +164,9 @@ export default {
     let roomList = ref([])
     let totalPage = ref(1)
 
+    let loadRoom = ref(false)
+    let loadRecommendedRoom = ref(false)
+
     let page = ref(1)
     let place = ref(route.query.place)
 
@@ -169,7 +176,6 @@ export default {
 
       page.value = 1
       onGetTotalNumberOfPlaceInCity()
-      onGetPlaceByCity()
 
       if (isLoggedIn.value) {
         onGetRecommendByCity()
@@ -192,6 +198,8 @@ export default {
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             totalPage.value = Math.ceil(data.data / 20)
+
+                            onGetPlaceByCity()
                           })
                           .setOnFinally(() => {})
       
@@ -203,13 +211,17 @@ export default {
     }
 
     async function onGetPlaceByCity() {
+      loadRoom.value = true
+
       const handler = new ApiHandler()
                           .setData({place: place.value, page: page.value})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             roomList.value = data.data
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadRoom.value = false
+                          })
 
       const onRequest = async () => {
         return placeApi.getPlaceByCity(handler.data)
@@ -219,6 +231,8 @@ export default {
     }
 
     async function onGetSearchByNameOrAdd() {
+      loadRoom.value = true
+
       const handler = new ApiHandler()
                           .setData({search: locationSearch.value, page: page.value})
                           .setOnResponse(rawData => {
@@ -226,7 +240,9 @@ export default {
                             roomList.value = data.data.data
                             totalPage.value = Math.ceil(data.data.count / 20)
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadRoom.value = false
+                          })
 
       const onRequest = async () => {
         return placeApi.getSearchByNameOrAdd(handler.data)
@@ -239,13 +255,17 @@ export default {
     let recommendedList = ref([])
 
     async function onGetRecommendByCity() {
+      loadRecommendedRoom.value = true
+
       const handler = new ApiHandler()
                           .setData({city: place.value})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             recommendedList.value = data.data
                           })
-                          .setOnFinally(() => {})
+                          .setOnFinally(() => {
+                            loadRecommendedRoom.value = false
+                          })
 
       const onRequest = async () => {
         return placeApi.getRecommendByCity(handler.data)
@@ -274,23 +294,22 @@ export default {
     }
 
     function searchPlaces() {
-      if (place.value) {
-        onGetPlaceByCity()
-      } else if (locationSearch.value) {
+      if (locationSearch.value) {
         onGetSearchByNameOrAdd()
+      } else {
+        onGetPlaceByCity()
       }
     }
 
     onMounted(() => {
-      if (place.value) {
+      if (locationSearch.value) {
+        onGetSearchByNameOrAdd()
+      } else {
         onGetTotalNumberOfPlaceInCity()
-        onGetPlaceByCity()
 
         if (isLoggedIn.value) {
           onGetRecommendByCity()
         }
-      } else if (locationSearch.value) {
-        onGetSearchByNameOrAdd()
       }
     })
 
@@ -316,6 +335,9 @@ export default {
       INTERESTING_PLACES,
       FILTER_OPTIONS,
       PAGINATION_SIZE,
+      place,
+      loadRoom,
+      loadRecommendedRoom
     };
   },
 };

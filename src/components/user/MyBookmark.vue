@@ -1,18 +1,20 @@
 <template>
-  <div class="row" v-if="list.length">
-    <div
-      v-for="item in list"
-      :key="item.id"
-      class="col-xs-6 col-md-3 col-lg-20"
-    >
-      <bookmark-preview :item="item" :removeBookmark="onDeleteBookmark" />
+  <div v-loading="loadBookmark">
+    <div class="row" v-if="list.length">
+      <div
+        v-for="item in list"
+        :key="item.id"
+        class="col-xs-6 col-md-3 col-lg-20"
+      >
+        <bookmark-preview :item="item" :removeBookmark="onDeleteBookmark" />
+      </div>
     </div>
+    <el-empty
+      v-else
+      :image-size="200"
+      :description="$t('shared.no_data')"
+    ></el-empty>
   </div>
-  <el-empty
-    v-else
-    :image-size="200"
-    :description="$t('shared.no_data')"
-  ></el-empty>
 </template>
 
 <script>
@@ -32,13 +34,19 @@ export default {
   setup() {
     let list = ref([]);
 
+    let loadBookmark = ref(false)
+
     const getUserBookmark = async () => {
+      loadBookmark.value = true
+
       const handler = new ApiHandler()
         .setOnResponse((rawData) => {
           const data = new ResponseHelper(rawData);
           list.value = data.data;
         })
-        .setOnFinally(() => {});
+        .setOnFinally(() => {
+          loadBookmark.value = false
+        });
 
       const onRequest = async () => {
         return placeApi.getUserBookmark();
@@ -87,6 +95,7 @@ export default {
     return {
       list,
       onDeleteBookmark,
+      loadBookmark
     };
   },
 };

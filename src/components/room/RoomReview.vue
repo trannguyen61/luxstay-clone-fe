@@ -78,8 +78,10 @@ export default {
     let userId = computed(() => store.state.user.user.id)
     let isLoggedIn = computed(() => store.getters.isLoggedIn)
 
+    let hasFetchedBookedList = ref('false')
+
     let ableToWriteAReview = computed(() => {
-      if (!bookedList.value.length && isLoggedIn.value) {
+      if (!hasFetchedBookedList.value && !bookedList.value.length && isLoggedIn.value) {
         getBookedRoomList()
         return
       }
@@ -92,18 +94,19 @@ export default {
     })
 
     onMounted(() => {
-      console.log(bookedList.value)
-      if (!bookedList.value.length && isLoggedIn.value) {
+      if (!hasFetchedBookedList.value && !bookedList.value.length && isLoggedIn.value) {
         getBookedRoomList()
       }
     })
 
     const getBookedRoomList = async () => {
+      console.log('-----------')
       const handler = new ApiHandler()
                           .setData({id: userId.value})
                           .setOnResponse(rawData => {
                             const data = new ResponseHelper(rawData)
                             store.commit('changeBookedList', data.data)
+                            hasFetchedBookedList.value = true
                           })
                           .setOnFinally(() => {})
       
