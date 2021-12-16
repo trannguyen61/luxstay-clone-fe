@@ -3,7 +3,7 @@
     <filter-bar
       :city="place"
       :page="page"
-      @update-list="updateList">
+      @filter="onGetFilter">
     </filter-bar>
     
     <div class="section-title">
@@ -167,6 +167,8 @@ export default {
     let loadRoom = ref(false)
     let loadRecommendedRoom = ref(false)
 
+    let useFilter = ref(false)
+
     let page = ref(1)
     let place = ref(route.query.place)
 
@@ -211,6 +213,7 @@ export default {
     }
 
     async function onGetPlaceByCity() {
+      useFilter.value = false
       loadRoom.value = true
 
       const handler = new ApiHandler()
@@ -231,6 +234,7 @@ export default {
     }
 
     async function onGetSearchByNameOrAdd() {
+      useFilter.value = false
       loadRoom.value = true
 
       const handler = new ApiHandler()
@@ -274,6 +278,46 @@ export default {
       await handler.setOnRequest(onRequest).execute()
     }
 
+    let savedPriceRange = ref([])
+    let savedGeneralFilterOptions = ref({})
+
+    async function onGetFilter({ priceRange, generalFilterOptions }) {
+      loadRoom.value = true
+      useFilter.value = true
+      savedPriceRange.value = priceRange
+      savedGeneralFilterOptions.value = generalFilterOptions
+
+      const params = {
+        ...(priceRange.length == 2
+          ? {
+              min_price: priceRange[0],
+              max_price: priceRange[1],
+            }
+          : {}),
+        ...(generalFilterOptions.bedNumber ? { num_of_bed: generalFilterOptions.bedNumber} : {}),
+        ...(generalFilterOptions.bedroomNumber ? { num_of_bedroom: generalFilterOptions.bedroomNumber} : {}),
+        ...(generalFilterOptions.bathroomNumber ? { num_of_bathroom: generalFilterOptions.bathroomNumber} : {}),
+      }
+
+      if (!Object.keys(params).length) return
+
+      const handler = new ApiHandler()
+                          .setData({params, page: page.value, city: place.value})
+                          .setOnResponse(rawData => {
+                            const data = new ResponseHelper(rawData)
+                            updateList(data.data)
+                          })
+                          .setOnFinally(() => {
+                            loadRoom.value = false
+                          })
+
+      const onRequest = async () => {
+        return placeApi.getFilter(handler.data)
+      }
+
+      await handler.setOnRequest(onRequest).execute()
+    }
+
     function onNextPage() {
       if (page.value == totalPage.value) return
 
@@ -294,7 +338,9 @@ export default {
     }
 
     function searchPlaces() {
-      if (locationSearch.value) {
+      if (useFilter.value) {
+        onGetFilter({priceRange: savedPriceRange.value, generalFilterOptions: savedGeneralFilterOptions.value})
+      } else if (locationSearch.value) {
         onGetSearchByNameOrAdd()
       } else {
         onGetPlaceByCity()
@@ -337,7 +383,8 @@ export default {
       PAGINATION_SIZE,
       place,
       loadRoom,
-      loadRecommendedRoom
+      loadRecommendedRoom,
+      onGetFilter
     };
   },
 };

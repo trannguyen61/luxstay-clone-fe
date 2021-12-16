@@ -72,6 +72,7 @@ export default {
       done()
     }
     function done() {
+      console.log(priceRange.value, '---- range')
       context.emit("choose-filters", priceRange.value);
     }
 
