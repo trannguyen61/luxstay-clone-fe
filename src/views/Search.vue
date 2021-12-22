@@ -234,6 +234,8 @@ export default {
     }
 
     async function onGetSearchByNameOrAdd() {
+      if (useFilter.value) page.value = 1
+      
       useFilter.value = false
       loadRoom.value = true
 
@@ -282,6 +284,8 @@ export default {
     let savedGeneralFilterOptions = ref({})
 
     async function onGetFilter({ priceRange, generalFilterOptions }) {
+      if (!useFilter.value) page.value = 1
+
       loadRoom.value = true
       useFilter.value = true
       savedPriceRange.value = priceRange

@@ -85,7 +85,8 @@ export default {
     total_price: "Tông chi phí",
     bookmark: "Yêu thích",
     rmv_bookmark: "Bỏ yêu thích",
-    recommend: "Phòng gợi ý"
+    recommend: "Phòng gợi ý",
+    no_review: "Chưa có đánh giá cho phòng này"
   },
   places: {
     hanoi: "Hà Nội",

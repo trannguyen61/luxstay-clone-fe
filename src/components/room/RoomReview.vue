@@ -22,26 +22,31 @@
     <el-divider></el-divider>
   </div>
 
-  <div class="room-page--review mt-2" v-for="review in reviews" :key="review.id">
-    <div class="d-flex align-items-center mb-2">
-      <div class="room-page--host">
-        <i class="el-icon-user"></i>
-      </div>
-      <div class="ml-2">
-        <div class="d-flex align-items-center">
-          <h5 class="m-0">{{ review.user_name }}</h5>
-
-          <div class="rating ml-2">
-            <font-awesome-icon icon="star" color="#ffcd3c" />
-            {{ review.score }}
-          </div>
+  <template v-if="reviews.length">
+    <div class="room-page--review mt-2" v-for="review in reviews" :key="review.id">
+      <div class="d-flex align-items-center mb-2">
+        <div class="room-page--host">
+          <i class="el-icon-user"></i>
         </div>
-        <!-- <small>{{ convertDate(review.created_at, 'T') }}</small> -->
+        <div class="ml-2">
+          <div class="d-flex align-items-center">
+            <h5 class="m-0">{{ review.user_name }}</h5>
+
+            <div class="rating ml-2">
+              <font-awesome-icon icon="star" color="#ffcd3c" />
+              {{ review.score }}
+            </div>
+          </div>
+          <!-- <small>{{ convertDate(review.created_at, 'T') }}</small> -->
+        </div>
+      </div>
+      <div>
+        <p class="m-0">{{ review.comment }}</p>
       </div>
     </div>
-    <div>
-      <p class="m-0">{{ review.comment }}</p>
-    </div>
+  </template>
+  <div class="room-page--review mt-2" v-else>
+    <p class="m-0">{{ $t("shared.no_review") }}</p>
   </div>
 </template>
 
@@ -78,7 +83,7 @@ export default {
     let userId = computed(() => store.state.user.user.id)
     let isLoggedIn = computed(() => store.getters.isLoggedIn)
 
-    let hasFetchedBookedList = ref('false')
+    let hasFetchedBookedList = ref(false)
 
     let ableToWriteAReview = computed(() => {
       if (!hasFetchedBookedList.value && !bookedList.value.length && isLoggedIn.value) {
@@ -100,7 +105,6 @@ export default {
     })
 
     const getBookedRoomList = async () => {
-      console.log('-----------')
       const handler = new ApiHandler()
                           .setData({id: userId.value})
                           .setOnResponse(rawData => {

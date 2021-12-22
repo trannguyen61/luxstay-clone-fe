@@ -84,7 +84,8 @@ export default {
     total_price: "Total price",
     bookmark: "Bookmark",
     rmv_bookmark: "Delete bookmark",
-    recommend: "Recommend rooms"
+    recommend: "Recommend rooms",
+    no_review: "No review just yet"
   },
   places: {
     hanoi: "Hanoi",
